@@ -68,4 +68,8 @@ public class UserService {
             return null;
     }
 
+    public List<User> getList(){
+        //TODO
+        return null;
+    }
 }
