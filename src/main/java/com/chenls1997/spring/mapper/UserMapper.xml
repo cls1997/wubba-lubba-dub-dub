@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chenls1997.spring.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.chenls1997.spring.model.User" >
+    <id column="Userid" property="userid" jdbcType="INTEGER" />
+    <result column="Username" property="username" jdbcType="VARCHAR" />
+    <result column="UserPassword" property="userpassword" jdbcType="VARCHAR" />
+    <result column="Email" property="email" jdbcType="VARCHAR" />
+    <result column="Phone" property="phone" jdbcType="VARCHAR" />
+    <result column="Question" property="question" jdbcType="VARCHAR" />
+    <result column="Result" property="result" jdbcType="VARCHAR" />
+    <result column="Address" property="address" jdbcType="VARCHAR" />
+    <result column="RegTime" property="regtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Userid, Username, UserPassword, Email, Phone, Question, Result, Address, RegTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from x_users
+    where Userid = #{userid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from x_users
+    where Userid = #{userid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.chenls1997.spring.model.User" >
+    insert into x_users (Userid, Username, UserPassword, 
+      Email, Phone, Question, 
+      Result, Address, RegTime
+      )
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userpassword,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, 
+      #{result,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{regtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.chenls1997.spring.model.User" >
+    insert into x_users
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        Userid,
+      </if>
+      <if test="username != null" >
+        Username,
+      </if>
+      <if test="userpassword != null" >
+        UserPassword,
+      </if>
+      <if test="email != null" >
+        Email,
+      </if>
+      <if test="phone != null" >
+        Phone,
+      </if>
+      <if test="question != null" >
+        Question,
+      </if>
+      <if test="result != null" >
+        Result,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="regtime != null" >
+        RegTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null" >
+        #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="question != null" >
+        #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        #{regtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chenls1997.spring.model.User" >
+    update x_users
+    <set >
+      <if test="username != null" >
+        Username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null" >
+        UserPassword = #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        Phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="question != null" >
+        Question = #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        Result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        Address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        RegTime = #{regtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Userid = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chenls1997.spring.model.User" >
+    update x_users
+    set Username = #{username,jdbcType=VARCHAR},
+      UserPassword = #{userpassword,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      Phone = #{phone,jdbcType=VARCHAR},
+      Question = #{question,jdbcType=VARCHAR},
+      Result = #{result,jdbcType=VARCHAR},
+      Address = #{address,jdbcType=VARCHAR},
+      RegTime = #{regtime,jdbcType=TIMESTAMP}
+    where Userid = #{userid,jdbcType=INTEGER}
+  </update>
+</mapper>

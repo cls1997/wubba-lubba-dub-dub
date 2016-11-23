@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chenls1997.spring.mapper.CartMapper" >
+  <resultMap id="BaseResultMap" type="com.chenls1997.spring.model.Cart" >
+    <id column="CarID" property="carid" jdbcType="BIGINT" />
+    <result column="UserID" property="userid" jdbcType="VARCHAR" />
+    <result column="GoodsID" property="goodsid" jdbcType="VARCHAR" />
+    <result column="OrderTime" property="ordertime" jdbcType="TIMESTAMP" />
+    <result column="OrderCount" property="ordercount" jdbcType="INTEGER" />
+    <result column="GoodsPrice" property="goodsprice" jdbcType="DOUBLE" />
+    <result column="UserCheck" property="usercheck" jdbcType="INTEGER" />
+    <result column="OrderPrice" property="orderprice" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CarID, UserID, GoodsID, OrderTime, OrderCount, GoodsPrice, UserCheck, OrderPrice
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from x_cart
+    where CarID = #{carid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from x_cart
+    where CarID = #{carid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.chenls1997.spring.model.Cart" >
+    insert into x_cart (CarID, UserID, GoodsID, 
+      OrderTime, OrderCount, GoodsPrice, 
+      UserCheck, OrderPrice)
+    values (#{carid,jdbcType=BIGINT}, #{userid,jdbcType=VARCHAR}, #{goodsid,jdbcType=VARCHAR}, 
+      #{ordertime,jdbcType=TIMESTAMP}, #{ordercount,jdbcType=INTEGER}, #{goodsprice,jdbcType=DOUBLE}, 
+      #{usercheck,jdbcType=INTEGER}, #{orderprice,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chenls1997.spring.model.Cart" >
+    insert into x_cart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carid != null" >
+        CarID,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="goodsid != null" >
+        GoodsID,
+      </if>
+      <if test="ordertime != null" >
+        OrderTime,
+      </if>
+      <if test="ordercount != null" >
+        OrderCount,
+      </if>
+      <if test="goodsprice != null" >
+        GoodsPrice,
+      </if>
+      <if test="usercheck != null" >
+        UserCheck,
+      </if>
+      <if test="orderprice != null" >
+        OrderPrice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carid != null" >
+        #{carid,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsid != null" >
+        #{goodsid,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertime != null" >
+        #{ordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordercount != null" >
+        #{ordercount,jdbcType=INTEGER},
+      </if>
+      <if test="goodsprice != null" >
+        #{goodsprice,jdbcType=DOUBLE},
+      </if>
+      <if test="usercheck != null" >
+        #{usercheck,jdbcType=INTEGER},
+      </if>
+      <if test="orderprice != null" >
+        #{orderprice,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chenls1997.spring.model.Cart" >
+    update x_cart
+    <set >
+      <if test="userid != null" >
+        UserID = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsid != null" >
+        GoodsID = #{goodsid,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertime != null" >
+        OrderTime = #{ordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordercount != null" >
+        OrderCount = #{ordercount,jdbcType=INTEGER},
+      </if>
+      <if test="goodsprice != null" >
+        GoodsPrice = #{goodsprice,jdbcType=DOUBLE},
+      </if>
+      <if test="usercheck != null" >
+        UserCheck = #{usercheck,jdbcType=INTEGER},
+      </if>
+      <if test="orderprice != null" >
+        OrderPrice = #{orderprice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where CarID = #{carid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chenls1997.spring.model.Cart" >
+    update x_cart
+    set UserID = #{userid,jdbcType=VARCHAR},
+      GoodsID = #{goodsid,jdbcType=VARCHAR},
+      OrderTime = #{ordertime,jdbcType=TIMESTAMP},
+      OrderCount = #{ordercount,jdbcType=INTEGER},
+      GoodsPrice = #{goodsprice,jdbcType=DOUBLE},
+      UserCheck = #{usercheck,jdbcType=INTEGER},
+      OrderPrice = #{orderprice,jdbcType=DOUBLE}
+    where CarID = #{carid,jdbcType=BIGINT}
+  </update>
+</mapper>
