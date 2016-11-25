@@ -22,9 +22,14 @@ public class IndexController extends BaseController{
 	private AdminService adminService;
 	@Autowired
 	ActionNodeService actionNodeService;
+
+    @RequestMapping(value = "/")
+    public String QAQ(Model model,HttpServletRequest request,HttpServletResponse response){
+        return "siteMain/siteMain";
+    }
 	
 
-	@RequestMapping(value={"/"})
+	@RequestMapping(value={"/sys"})
 	public String index(Model model,HttpServletRequest request,HttpServletResponse response) {
 		model.addAttribute("leftMenuList",actionNodeService.getList(1));
 		model.addAttribute("roleId",1);
