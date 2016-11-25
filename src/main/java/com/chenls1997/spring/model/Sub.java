@@ -3,7 +3,7 @@ package com.chenls1997.spring.model;
 import java.util.Date;
 
 public class Sub {
-    private String subid;
+    private Long subid;
 
     private String userid;
 
@@ -23,12 +23,12 @@ public class Sub {
 
     private Integer state;
 
-    public String getSubid() {
+    public Long getSubid() {
         return subid;
     }
 
-    public void setSubid(String subid) {
-        this.subid = subid == null ? null : subid.trim();
+    public void setSubid(Long subid) {
+        this.subid = subid;
     }
 
     public String getUserid() {

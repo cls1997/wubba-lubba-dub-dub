@@ -24,9 +24,6 @@ public class UserService {
     private UserMapper mapper;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private SqlRunner sqlRunner;
 
     public Integer delete(Integer id){

@@ -22,6 +22,7 @@ import com.zlzkj.core.util.Fn;
 @Transactional
 public class AdminService {
 
+	@SuppressWarnings("SpringJavaAutowiringInspection")
 	@Autowired
 	private AdminMapper mapper;
 	@Autowired
