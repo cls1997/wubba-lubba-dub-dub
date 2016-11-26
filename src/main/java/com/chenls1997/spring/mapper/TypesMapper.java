@@ -1,7 +1,9 @@
 package com.chenls1997.spring.mapper;
 
 import com.chenls1997.spring.model.Types;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface TypesMapper {
     int deleteByPrimaryKey(Long typeid);
 

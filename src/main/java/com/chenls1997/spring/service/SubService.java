@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class SubService {
-    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private SubMapper mapper;
 

@@ -17,7 +17,6 @@ import com.zlzkj.core.sql.SQLBuilder;
 @Service
 @Transactional
 public class RoleNodeService {
-
 	@Autowired
 	private RoleNodeMapper mapper;
 	

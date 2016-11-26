@@ -13,6 +13,9 @@
 <html>
 <head>
     <title>reg</title>
+    <script>
+        function()
+    </script>
 </head>
 <body>
 <form action="/user/register" method="post" id="regform" >

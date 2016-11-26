@@ -18,15 +18,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from x_users
+    from x_user
     where Userid = #{userid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from x_users
+    delete from x_user
     where Userid = #{userid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.chenls1997.spring.model.User" >
-    insert into x_users (Userid, Username, UserPassword,
+    insert into x_user (Userid, Username, UserPassword,
       Email, Phone, Question, 
       Result, Address, RegTime
       )
@@ -36,7 +36,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.chenls1997.spring.model.User" >
-    insert into x_users
+    insert into x_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userid != null" >
         Userid,
@@ -97,7 +97,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.chenls1997.spring.model.User" >
-    update x_users
+    update x_user
     <set >
       <if test="username != null" >
         Username = #{username,jdbcType=VARCHAR},
@@ -127,7 +127,7 @@
     where Userid = #{userid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.chenls1997.spring.model.User" >
-    update x_users
+    update x_user
     set Username = #{username,jdbcType=VARCHAR},
       UserPassword = #{userpassword,jdbcType=VARCHAR},
       Email = #{email,jdbcType=VARCHAR},

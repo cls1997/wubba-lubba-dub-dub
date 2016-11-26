@@ -47,7 +47,7 @@ public class UserController extends BaseController {
                 return ajaxReturn(response,null,"注册成功",1);
             }
         }else{
-            return "index/register";
+            return "user/register";
         }
     }
     @RequestMapping(value = "login")
@@ -64,7 +64,7 @@ public class UserController extends BaseController {
                 return ajaxReturn(response,entity,"登陆成功",1);
             }
         }else{
-            return "index/login";
+            return "user/login";
        }
     }
 

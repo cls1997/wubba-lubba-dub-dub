@@ -58,7 +58,7 @@ public class UserService {
                 .where(where).selectSql();
         List<Row> list = sqlRunner.select(sql);
         if (list.size()>0)
-            return this.findByID(list.get(0).getInt("id"));
+            return this.findByID(list.get(0).getInt("Userid"));
         else
             return null;
     }

@@ -18,7 +18,6 @@ import com.zlzkj.core.sql.SQLBuilder;
 @Service
 @Transactional
 public class RoleService {
-
 	@Autowired
 	private RoleMapper mapper;
 	
