@@ -8,7 +8,6 @@ import com.zlzkj.core.sql.SQLBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.jws.soap.SOAPBinding;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +41,6 @@ public class UserService {
         mapper.insert(entity);
         return entity.getUserid();
     }
-
     public User findByID(Integer id){
         return (User) mapper.selectByPrimaryKey(id);
     }

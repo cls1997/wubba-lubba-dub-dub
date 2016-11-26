@@ -26,7 +26,7 @@
     where Userid = #{userid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.chenls1997.spring.model.User" >
-    insert into x_users (Userid, Username, UserPassword, 
+    insert into x_users (Userid, Username, UserPassword,
       Email, Phone, Question, 
       Result, Address, RegTime
       )

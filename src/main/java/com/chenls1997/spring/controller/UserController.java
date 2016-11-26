@@ -5,15 +5,15 @@ package com.chenls1997.spring.controller;
         import com.chenls1997.spring.util.StringUtil;
         import com.zlzkj.core.base.BaseController;
         import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.beans.factory.annotation.Value;
         import org.springframework.stereotype.Controller;
         import org.springframework.ui.Model;
-        import org.springframework.web.bind.annotation.RequestBody;
         import org.springframework.web.bind.annotation.RequestMapping;
         import org.springframework.web.bind.annotation.RequestMethod;
 
         import javax.servlet.http.HttpServletRequest;
         import javax.servlet.http.HttpServletResponse;
+        import java.sql.Timestamp;
+        import java.util.Date;
 
 /**
  * Created by Chenls on 16/11/23.
@@ -27,6 +27,14 @@ public class UserController extends BaseController {
     @RequestMapping(value = "register")
     public String registerHandler(User entity, HttpServletRequest request, HttpServletResponse response){
         if (request.getMethod().equals("POST")) {
+            Date date = new Date();
+            Timestamp timestamp = new Timestamp(date.getTime());
+            entity.setRegtime(timestamp);
+            int id = 1;
+            while (userService.findByID(id)!=null){
+                id++;
+            }
+            entity.setUserid(id);
             Integer status=null;
             try{
                 status = userService.save(entity);
@@ -39,15 +47,16 @@ public class UserController extends BaseController {
                 return ajaxReturn(response,null,"注册成功",1);
             }
         }else{
-            return "user/register";
+            return "index/register";
         }
     }
-
     @RequestMapping(value = "login")
-    public String loginHandler(Model model,HttpServletRequest request,HttpServletResponse response){
+    public String loginHandler(Model model,HttpServletRequest request,HttpServletResponse response) {
         if(request.getMethod().equals("POST")){
-            String username = (String)request.getAttribute("username");
-            String password = (String)request.getAttribute("password");
+            String username = (String)request.getParameter("username");
+            String password = (String)request.getParameter("userpassword");
+            System.out.println(username);
+            System.out.println(password);
             User entity = userService.LoginGetObj(username,password);
             if (entity==null) {
                 return ajaxReturn(response,null,"登陆失败",0);
@@ -55,8 +64,8 @@ public class UserController extends BaseController {
                 return ajaxReturn(response,entity,"登陆成功",1);
             }
         }else{
-            return "user/login";
-        }
+            return "index/login";
+       }
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)

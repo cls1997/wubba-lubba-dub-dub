@@ -3,6 +3,7 @@ package com.chenls1997.spring.model;
 import java.util.Date;
 
 public class User {
+
     private Integer userid;
 
     private String username;

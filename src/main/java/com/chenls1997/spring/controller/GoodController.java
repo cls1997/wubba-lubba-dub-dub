@@ -83,9 +83,9 @@ public class GoodController extends BaseController {
     }
 
     @RequestMapping(value = "good_view")
-    public String goodView(Model model,HttpServletRequest request,HttpServletResponse response,Good entity){
-        //// TODO: 16/11/25
-        return null;
+    public String goodView(Long id,HttpServletRequest request,HttpServletResponse response){
+        Good ret = goodService.findByID(id);
+        return ajaxReturn(response,ret);
     }
 
     @RequestMapping(value = "type_add")

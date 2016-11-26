@@ -25,7 +25,7 @@ public class IndexController extends BaseController{
 
     @RequestMapping(value = "/")
     public String QAQ(Model model,HttpServletRequest request,HttpServletResponse response){
-        return "siteMain/siteMain";
+        return "good/sell";
     }
 	
 
