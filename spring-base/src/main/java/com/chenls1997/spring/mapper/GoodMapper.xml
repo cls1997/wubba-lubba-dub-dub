@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chenls1997.spring.mapper.GoodMapper" >
+  <resultMap id="BaseResultMap" type="com.chenls1997.spring.model.Good" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="good_name" property="goodName" jdbcType="VARCHAR" />
+    <result column="good_price" property="goodPrice" jdbcType="DOUBLE" />
+    <result column="good_type_id" property="goodTypeId" jdbcType="INTEGER" />
+    <result column="good_intro" property="goodIntro" jdbcType="VARCHAR" />
+    <result column="good_image" property="goodImage" jdbcType="VARCHAR" />
+    <result column="good_sold" property="goodSold" jdbcType="BIGINT" />
+    <result column="good_stock" property="goodStock" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, good_name, good_price, good_type_id, good_intro, good_image, good_sold, good_stock
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from x_goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from x_goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.chenls1997.spring.model.Good" >
+    insert into x_goods (id, good_name, good_price, 
+      good_type_id, good_intro, good_image, 
+      good_sold, good_stock)
+    values (#{id,jdbcType=INTEGER}, #{goodName,jdbcType=VARCHAR}, #{goodPrice,jdbcType=DOUBLE}, 
+      #{goodTypeId,jdbcType=INTEGER}, #{goodIntro,jdbcType=VARCHAR}, #{goodImage,jdbcType=VARCHAR}, 
+      #{goodSold,jdbcType=BIGINT}, #{goodStock,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chenls1997.spring.model.Good" >
+    insert into x_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="goodName != null" >
+        good_name,
+      </if>
+      <if test="goodPrice != null" >
+        good_price,
+      </if>
+      <if test="goodTypeId != null" >
+        good_type_id,
+      </if>
+      <if test="goodIntro != null" >
+        good_intro,
+      </if>
+      <if test="goodImage != null" >
+        good_image,
+      </if>
+      <if test="goodSold != null" >
+        good_sold,
+      </if>
+      <if test="goodStock != null" >
+        good_stock,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="goodName != null" >
+        #{goodName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodPrice != null" >
+        #{goodPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="goodTypeId != null" >
+        #{goodTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="goodIntro != null" >
+        #{goodIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="goodImage != null" >
+        #{goodImage,jdbcType=VARCHAR},
+      </if>
+      <if test="goodSold != null" >
+        #{goodSold,jdbcType=BIGINT},
+      </if>
+      <if test="goodStock != null" >
+        #{goodStock,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chenls1997.spring.model.Good" >
+    update x_goods
+    <set >
+      <if test="goodName != null" >
+        good_name = #{goodName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodPrice != null" >
+        good_price = #{goodPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="goodTypeId != null" >
+        good_type_id = #{goodTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="goodIntro != null" >
+        good_intro = #{goodIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="goodImage != null" >
+        good_image = #{goodImage,jdbcType=VARCHAR},
+      </if>
+      <if test="goodSold != null" >
+        good_sold = #{goodSold,jdbcType=BIGINT},
+      </if>
+      <if test="goodStock != null" >
+        good_stock = #{goodStock,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chenls1997.spring.model.Good" >
+    update x_goods
+    set good_name = #{goodName,jdbcType=VARCHAR},
+      good_price = #{goodPrice,jdbcType=DOUBLE},
+      good_type_id = #{goodTypeId,jdbcType=INTEGER},
+      good_intro = #{goodIntro,jdbcType=VARCHAR},
+      good_image = #{goodImage,jdbcType=VARCHAR},
+      good_sold = #{goodSold,jdbcType=BIGINT},
+      good_stock = #{goodStock,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
