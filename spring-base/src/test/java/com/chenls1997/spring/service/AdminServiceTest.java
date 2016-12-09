@@ -17,16 +17,15 @@ import com.zlzkj.core.sql.SQLBuilder;
 
 import java.util.List;
 
-
+@SuppressWarnings("SpringJavaAutowiringInspection")
 public class AdminServiceTest extends BaseSpringTest{
 
 	protected Log logger = LogFactory.getLog(AdminServiceTest.class);
-	
+
 	@Autowired
 	private AdminService adminService;
 	@Autowired
 	private RoleService roleService;
-	
 	@Autowired
 	private SqlRunner sqlRunner;
 
@@ -46,7 +45,6 @@ public class AdminServiceTest extends BaseSpringTest{
 			try {
 				adminService.save(admin);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				System.out.println(e.getLocalizedMessage());
 			}
 			int newId = admin.getId();

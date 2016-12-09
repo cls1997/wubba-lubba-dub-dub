@@ -34,7 +34,7 @@ public class IndexController extends BaseController{
 	public String index(Model model,HttpServletRequest request,HttpServletResponse response) {
 		model.addAttribute("leftMenuList",actionNodeService.getList(1));
 		model.addAttribute("roleId",1);
-		return "main/main";
+		return "admin/index";
 	}
 	
 	@RequestMapping(value={"/test/notice"})

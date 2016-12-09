@@ -44,6 +44,8 @@ public class AdminController extends BaseController{
 	
 	@RequestMapping(value={"/"})
 	public String index(Model model,HttpServletRequest request,HttpServletResponse response) {
+		model.addAttribute("leftMenuList",actionNodeService.getList(1));
+		model.addAttribute("roleId",1);
 		return "admin/index";
 	}
 		
@@ -128,7 +130,7 @@ public class AdminController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value={"action_node"})
-	public String actionNode(HttpServletRequest request, HttpServletResponse response) {
+	public String actionNode(Model model,HttpServletRequest request, HttpServletResponse response) {
 		if(request.getMethod().equals("POST")){
 			Map<String, Object> where = new HashMap<String, Object>();
 			return BaseController.ajaxReturn(response, actionNodeService.getUIGridData(where,UIUtils.getPageParams(request)));
@@ -143,7 +145,7 @@ public class AdminController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value={"action_node_add"})
-	public String actionNodeAdd(HttpServletRequest request, HttpServletResponse response,
+	public String actionNodeAdd(Model model, HttpServletRequest request, HttpServletResponse response,
 			ActionNode actionNode) {
 		
 		if(request.getMethod().equals("POST")){
@@ -178,7 +180,7 @@ public class AdminController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value={"action_node_delete"},method=RequestMethod.POST)
-	public String actionNodeDelete(HttpServletRequest request,HttpServletResponse response,Integer id) {
+	public String actionNodeDelete(Model model, HttpServletRequest request,HttpServletResponse response,Integer id) {
 		String delIds = request.getParameter("delIds");
 		
 		String[] ids = delIds.split(",");
@@ -300,7 +302,7 @@ public class AdminController extends BaseController{
 		    Admin entity = adminService.findById(1);//假设ID为1
 		    model.addAttribute("admin", entity);
 		    
-		 //   com.chenls1997.spring.model.addAttribute("picUrl", UploadUtils.parseFileUrl(entity.getHeadImage()));
+		   //model.addAttribute("picUrl", UploadUtils.parseFileUrl(entity.getHeadImage()));
 			return "admin/set_head";
 	}
 	

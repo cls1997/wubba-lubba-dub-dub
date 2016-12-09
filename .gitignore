@@ -1,1 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
+/spring-admin/src/main/resources/jdbc.properties
+/spring-home/src/main/resources/jdbc.properties
+/spring-base/src/main/resources/log4j.properties
+/spring-base/src/main/resources/generatorConfig.xml
