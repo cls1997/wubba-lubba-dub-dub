@@ -53,7 +53,7 @@ public class AdminController extends BaseController{
 	public String findById(Integer id, HttpServletRequest request, HttpServletResponse response) {
 		
 		Admin admin = adminService.findById(id);
-		return BaseController.ajaxReturn(response, admin);
+		return ajaxReturn(response, admin);
 	}
 	
 	@RequestMapping(value={"list"})
@@ -63,7 +63,7 @@ public class AdminController extends BaseController{
 			
 		model.addAttribute("adminList",adminList);
 		if(request.getMethod().equals("POST")){
-			return BaseController.ajaxReturn(response, adminList);
+			return ajaxReturn(response, adminList);
 		}else{
 			return "admin/list";
 		}
@@ -76,12 +76,12 @@ public class AdminController extends BaseController{
 				try {
 					count = adminService.save(entity);
 				} catch (Exception e) {
-					return BaseController.ajaxReturn(response,null,e.getLocalizedMessage(),-1);
+					return ajaxReturn(response,null,e.getLocalizedMessage(),-1);
 				}
 			if(count==0)
-				return BaseController.ajaxReturn(response,null,"添加失败",0);
+				return ajaxReturn(response,null,"添加失败",0);
 			else
-				return BaseController.ajaxReturn(response, null,"添加成功",1);
+				return ajaxReturn(response, null,"添加成功",1);
 		}else{
 			return "admin/add";
 		}
@@ -89,19 +89,18 @@ public class AdminController extends BaseController{
 	
 	@RequestMapping(value={"edit"})
 	public String edit(Model model, Admin entity, HttpServletRequest request, HttpServletResponse response) {
-	
 		if(request.getMethod().equals("POST")){
 			Integer count = null;
 			try {
 				//entity.setId(Integer.parseInt(request.getParameter("id")));
 				count = adminService.update(entity);
 			} catch (Exception e) {
-				return BaseController.ajaxReturn(response,null,e.getLocalizedMessage(),-1);
+				return ajaxReturn(response,null,e.getLocalizedMessage(),-1);
 			}
 			if(count==0)
-		    	return BaseController.ajaxReturn(response,null,"更新失败",0);
+		    	return ajaxReturn(response,null,"更新失败",0);
 		    else
-		    	return BaseController.ajaxReturn(response, null,"更新成功",1);
+		    	return ajaxReturn(response, null,"更新成功",1);
 		}
         else
 			model.addAttribute("admin", adminService.findById(entity.getId()));
@@ -118,9 +117,9 @@ public class AdminController extends BaseController{
 		  count += adminService.delete(StringUtil.stringToInteger(temp));
 		}
 		if(count==0)
-			return BaseController.ajaxReturn(response,null,"删除失败",0);
+			return ajaxReturn(response,null,"删除失败",0);
 		else
-			return BaseController.ajaxReturn(response, count+"","删除成功",1);
+			return ajaxReturn(response, count+"","删除成功",1);
 		
 	}
 	
@@ -133,7 +132,7 @@ public class AdminController extends BaseController{
 	public String actionNode(Model model,HttpServletRequest request, HttpServletResponse response) {
 		if(request.getMethod().equals("POST")){
 			Map<String, Object> where = new HashMap<String, Object>();
-			return BaseController.ajaxReturn(response, actionNodeService.getUIGridData(where,UIUtils.getPageParams(request)));
+			return ajaxReturn(response, actionNodeService.getUIGridData(where,UIUtils.getPageParams(request)));
 		}else{
 			return "admin/action_node";
 		}
@@ -150,7 +149,7 @@ public class AdminController extends BaseController{
 		
 		if(request.getMethod().equals("POST")){
 			actionNodeService.insert(actionNode);
-			return BaseController.ajaxReturn(response, null,"添加成功",1);
+			return ajaxReturn(response, null,"添加成功",1);
 		}else{
 			return "admin/action_node_add";
 		}
@@ -167,7 +166,7 @@ public class AdminController extends BaseController{
 		
 		if(request.getMethod().equals("POST")){
 			actionNodeService.update(actionNode);
-			return BaseController.ajaxReturn(response, null,"修改成功",1);
+			return ajaxReturn(response, null,"修改成功",1);
 		}else{
 			model.addAttribute("actionNode",actionNodeService.findById(actionNode.getId()));
 			return "admin/action_node_edit";
@@ -189,9 +188,9 @@ public class AdminController extends BaseController{
 		  count += actionNodeService.delete(StringUtil.stringToInteger(temp));
 		}
 		if(count==0)
-			return BaseController.ajaxReturn(response,null,"删除失败",0);
+			return ajaxReturn(response,null,"删除失败",0);
 		else
-			return BaseController.ajaxReturn(response, count+"","删除成功",1);
+			return ajaxReturn(response, count+"","删除成功",1);
 		
 	}
 	
@@ -204,7 +203,7 @@ public class AdminController extends BaseController{
 	public String role(Model model, HttpServletRequest request, HttpServletResponse response) {
 		if(request.getMethod().equals("POST")){
 			Map<String, Object> where = new HashMap<String, Object>();
-			return BaseController.ajaxReturn(response, roleServcie.getUIGridData(where,UIUtils.getPageParams(request)));
+			return ajaxReturn(response, roleServcie.getUIGridData(where,UIUtils.getPageParams(request)));
 		}else{
 			return "admin/role";
 		}
@@ -222,9 +221,9 @@ public class AdminController extends BaseController{
     	if(request.getMethod().equals("POST")){
     		int flag = roleServcie.save(entity);
     		if(flag == 1){
-				return BaseController.ajaxReturn(response, null,"添加成功",1);
+				return ajaxReturn(response, null,"添加成功",1);
 			}else {
-				return BaseController.ajaxReturn(response, null,"发生错误，请重试！",0);
+				return ajaxReturn(response, null,"发生错误，请重试！",0);
 			}
     	}
     	return "admin/role_add";
@@ -247,9 +246,9 @@ public class AdminController extends BaseController{
 //    			System.out.println(entity.getId()+" "+entity.getName()+" AdminController 248");
     		int flag = roleServcie.update(entity);
     		if(flag == 1){
-				return BaseController.ajaxReturn(response, null,"添加成功",1);
+				return ajaxReturn(response, null,"添加成功",1);
 			}else {
-				return BaseController.ajaxReturn(response, null,"发生错误，请重试！",0);
+				return ajaxReturn(response, null,"发生错误，请重试！",0);
 			}
     	}
         return "admin/role_edit";
@@ -260,7 +259,7 @@ public class AdminController extends BaseController{
 //		if(request.getMethod().equals("POST")){
 //			System.out.println(id);
 			roleServcie.delete(id);
-			return BaseController.ajaxReturn(response, null,"删除成功",1);
+			return ajaxReturn(response, null,"删除成功",1);
     }
     
     /**
@@ -284,7 +283,7 @@ public class AdminController extends BaseController{
 					roleNodeService.save(roleNode);
 				}
 			}
-			return BaseController.ajaxReturn(response, null,"授权成功~",1);
+			return ajaxReturn(response, null,"授权成功~",1);
 		}else {
 			List<Map<String, Object>> node = actionNodeService.getNodeList(id);
 			System.out.println(node.toString()+"test");
@@ -324,7 +323,7 @@ public class AdminController extends BaseController{
 		if((Integer)picWebInfo.get("status")>0){ //上传完成
 			picWeb =  UploadUtils.parseFileUrl(picWebInfo.get("saveName").toString());
 		}else{ //上传出错
-			return BaseController.ajaxReturn(response,null,picWebInfo.get("errorMsg").toString(),0);
+			return ajaxReturn(response,null,picWebInfo.get("errorMsg").toString(),0);
 		}
 		
 		//String id = request.getParameter("id");
@@ -335,9 +334,9 @@ public class AdminController extends BaseController{
 		try {
 			adminService.update(entity);
 		} catch (Exception e) {
-			return BaseController.ajaxReturn(response, null, "更新头像失败", 0);
+			return ajaxReturn(response, null, "更新头像失败", 0);
 		}
 		
-		return BaseController.ajaxReturn(response, null, "更新头像成功", 1);
+		return ajaxReturn(response, null, "更新头像成功", 1);
 	}
 }

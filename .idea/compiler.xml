@@ -26,6 +26,7 @@
         <module name="spring-base" />
         <module name="spring-common" />
         <module name="spring-home" />
+        <module name="test-module" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8" />

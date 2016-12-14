@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ * 用户服务类
  * Created by Chenls on 16/11/23.
  */
 
@@ -41,13 +42,16 @@ public class UserService {
         mapper.insert(entity);
         return entity.getId();
     }
+
     public User findByID(Integer id){
         return (User) mapper.selectByPrimaryKey(id);
     }
 
-    /*
-     * This method could return null
+    /**
      * 登录获取对象用
+     * @param username
+     * @param password
+     * @return
      */
     public User LoginGetObj(String username,String password){
         HashMap<String, Object> where = new HashMap<String, Object>();
@@ -63,8 +67,9 @@ public class UserService {
             return null;
     }
 
-    public List<User> getList(){
-        //TODO
+    public List<Row> getList(){
+        String sql = "";
+        List<Row> lst = sqlRunner.select(sql);
         return null;
     }
 }

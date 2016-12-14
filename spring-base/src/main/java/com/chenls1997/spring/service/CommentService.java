@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 /**
+ * 评论服务类
  * Created by Chenls on 16/11/25.
  */
 
@@ -55,7 +56,7 @@ public class CommentService {
                 .order("good_id","asc")
                 .selectSql();
         List<Row> lst = sqlRunner.select(sql);
-        // TODO: 16/12/09  
+        // TODO: 16/12/09
         return null;
     }
 
@@ -69,6 +70,4 @@ public class CommentService {
         List<Row> lst = sqlRunner.select(sql);
         return lst;
     }
-    // TODO: 16/12/09
-
 }

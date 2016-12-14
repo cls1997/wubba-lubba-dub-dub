@@ -13,6 +13,7 @@
         <module>spring-home</module>
         <module>spring-base</module>
         <module>spring-admin</module>
+        <module>test-module</module>
     </modules>
 
     <properties>

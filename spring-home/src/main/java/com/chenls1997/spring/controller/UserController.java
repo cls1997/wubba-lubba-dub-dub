@@ -16,6 +16,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 /**
+ * 用户相关控制器
  * Created by Chenls on 16/11/23.
  */
 @Controller
@@ -24,32 +25,38 @@ public class UserController extends BaseController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 用户登陆
+     * @param entity\
+     * @return
+     */
     @RequestMapping(value = "register")
     public String registerHandler(User entity, HttpServletRequest request, HttpServletResponse response){
         if (request.getMethod().equals("POST")) {
             Date date = new Date();
             Timestamp timestamp = new Timestamp(date.getTime());
             entity.setRegTime(timestamp);
-            int id = 1;
-            while (userService.findByID(id)!=null){
-                id++;
-            }
-            entity.setId(id);
+
             Integer status=null;
             try{
                 status = userService.save(entity);
             }catch (Exception e){
-                return BaseController.ajaxReturn(response,null,e.getLocalizedMessage(),-1);
+                return ajaxReturn(response,null,e.getLocalizedMessage(),-1);
             }
             if(status==0){
-                return BaseController.ajaxReturn(response,null,"注册失败",0);
+                return ajaxReturn(response,null,"注册失败",0);
             }else {
-                return BaseController.ajaxReturn(response,null,"注册成功",1);
+                return ajaxReturn(response,null,"注册成功",1);
             }
         }else{
             return "user/register";
         }
     }
+    /**
+     *  用户登陆
+     *  @param model
+     *  @return
+     */
     @RequestMapping(value = "login")
     public String loginHandler(Model model,HttpServletRequest request,HttpServletResponse response) {
         if(request.getMethod().equals("POST")){
@@ -59,9 +66,9 @@ public class UserController extends BaseController {
             System.out.println(password);
             User entity = userService.LoginGetObj(username,password);
             if (entity==null) {
-                return BaseController.ajaxReturn(response,null,"登陆失败",0);
+                return ajaxReturn(response,null,"登陆失败",0);
             }else {
-                return BaseController.ajaxReturn(response,entity,"登陆成功",1);
+                return ajaxReturn(response,entity,"登陆成功",1);
             }
         }else{
             return "user/login";
@@ -69,7 +76,7 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
-    public String deleteHandler(HttpServletRequest request,HttpServletResponse response){
+    public String deleteHandler(Model model,HttpServletRequest request,HttpServletResponse response){
         String delIds = request.getParameter("ids");
         String ids[] = delIds.split(",");
         int count = 0;
@@ -77,9 +84,9 @@ public class UserController extends BaseController {
             count += userService.delete(StringUtil.stringToInteger(id));
         }
         if(count==0){
-            return BaseController.ajaxReturn(response,null,"删除失败",0);
+            return ajaxReturn(response,null,"删除失败",0);
         } else {
-            return BaseController.ajaxReturn(response,count+"","删除成功",1);
+            return ajaxReturn(response,count+"","删除成功",1);
         }
     }
 

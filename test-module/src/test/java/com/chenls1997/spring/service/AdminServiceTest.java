@@ -31,7 +31,14 @@ public class AdminServiceTest extends BaseSpringTest{
 
 	
 	@Before
-	public void init(){}
+	public void init(){
+        Admin admin = new Admin();
+        admin.setId(104);
+        admin.setRoleId(0);
+        admin.setAccount("testid");
+        admin.setPassword("test");
+        adminService.save(admin);
+	}
 	
 	
 	//测试：增加对象
@@ -152,7 +159,6 @@ public class AdminServiceTest extends BaseSpringTest{
 	public void test(){
 		String json = JSON.toJSONString(roleService.getUIGridData(null, null));
 		System.out.println(json);
-		
 	}
 
 }

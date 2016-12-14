@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
+ * 订单服务类
  * Created by Chenls on 16/11/25.
  */
 

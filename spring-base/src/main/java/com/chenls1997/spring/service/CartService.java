@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 购物车服务类
  * Created by Chenls on 16/12/06.
  */
 @Service
@@ -67,5 +68,5 @@ public class CartService {
         return ret;
     }
 
-    // TODO: 16/12/09  
+    // TODO: 16/12/09
 }

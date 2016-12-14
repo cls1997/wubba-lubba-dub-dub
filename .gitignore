@@ -3,3 +3,4 @@
 /spring-home/src/main/resources/jdbc.properties
 /spring-base/src/main/resources/log4j.properties
 /spring-base/src/main/resources/generatorConfig.xml
+/spring-base/src/main/resources/upload.properties
