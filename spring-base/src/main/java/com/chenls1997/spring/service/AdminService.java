@@ -42,9 +42,8 @@ public class AdminService {
 		return sqlRunner.update(sql);
 	}
 	
-	public Integer save(Admin entity){ 
-		mapper.insert(entity);
-		return  (Integer)entity.getId();
+	public Integer save(Admin entity){
+		return mapper.insert(entity);
 	}
 	
 	

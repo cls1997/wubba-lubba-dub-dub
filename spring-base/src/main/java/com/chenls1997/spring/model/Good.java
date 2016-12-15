@@ -17,6 +17,10 @@ public class Good {
 
     private Long goodStock;
 
+    private Integer providerId;
+
+    private Double discount;
+
     public Integer getId() {
         return id;
     }
@@ -79,5 +83,21 @@ public class Good {
 
     public void setGoodStock(Long goodStock) {
         this.goodStock = goodStock;
+    }
+
+    public Integer getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(Integer providerId) {
+        this.providerId = providerId;
+    }
+
+    public Double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
     }
 }

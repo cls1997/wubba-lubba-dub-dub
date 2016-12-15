@@ -34,8 +34,7 @@ public class TypeService {
     }
 
     public Integer save(Types entity){
-        mapper.insert(entity);
-        return entity.getId();
+        return mapper.insert(entity);
     }
 
     public Types findByID(Integer id){

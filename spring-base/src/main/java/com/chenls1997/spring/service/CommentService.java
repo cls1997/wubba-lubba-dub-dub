@@ -39,8 +39,8 @@ public class CommentService {
     }
 
     public Integer save(Comment entity){
-        mapper.insert(entity);
-        return entity.getId();
+
+        return mapper.insert(entity);
     }
 
     public Comment findByID(Integer id){

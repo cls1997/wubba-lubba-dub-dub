@@ -89,22 +89,22 @@ public class AdminController extends BaseController{
 	
 	@RequestMapping(value={"edit"})
 	public String edit(Model model, Admin entity, HttpServletRequest request, HttpServletResponse response) {
-		if(request.getMethod().equals("POST")){
+		if(request.getMethod().equals("POST")) {
 			Integer count = null;
 			try {
 				//entity.setId(Integer.parseInt(request.getParameter("id")));
 				count = adminService.update(entity);
 			} catch (Exception e) {
-				return ajaxReturn(response,null,e.getLocalizedMessage(),-1);
+				return ajaxReturn(response, null, e.getLocalizedMessage(), -1);
 			}
-			if(count==0)
-		    	return ajaxReturn(response,null,"更新失败",0);
-		    else
-		    	return ajaxReturn(response, null,"更新成功",1);
-		}
-        else
+			if (count == 0)
+				return ajaxReturn(response, null, "更新失败", 0);
+			else
+				return ajaxReturn(response, null, "更新成功", 1);
+		} else {
 			model.addAttribute("admin", adminService.findById(entity.getId()));
-        	return "admin/edit";
+			return "admin/edit";
+		}
 	}
 	
 	@RequestMapping(value={"delete"},method=RequestMethod.POST)

@@ -39,8 +39,7 @@ public class CartService {
     }
 
     public Integer save(Cart entity){
-        mapper.insert(entity);
-        return entity.getId();
+        return mapper.insert(entity);
     }
 
     public Cart findByID(Integer id){

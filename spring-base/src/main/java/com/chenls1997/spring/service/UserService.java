@@ -39,8 +39,7 @@ public class UserService {
     }
 
     public Integer save(User entity){
-        mapper.insert(entity);
-        return entity.getId();
+        return mapper.insert(entity);
     }
 
     public User findByID(Integer id){

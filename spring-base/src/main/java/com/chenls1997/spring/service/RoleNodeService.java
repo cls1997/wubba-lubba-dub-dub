@@ -30,12 +30,10 @@ public class RoleNodeService {
 	}
 	
 	public Integer update(RoleNode entity) throws Exception{
-		
 		return mapper.updateByPrimaryKey(entity);
 	}
 	
 	public Integer save(RoleNode entity) throws Exception{
-		
 		return mapper.insert(entity);
 	}
 	

@@ -34,8 +34,7 @@ public class SubService {
     }
 
     public Integer save(Sub entity){
-        mapper.insert(entity);
-        return entity.getId();
+        return mapper.insert(entity);
     }
 
     public Sub findByID(Integer id){

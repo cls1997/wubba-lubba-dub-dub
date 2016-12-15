@@ -75,7 +75,7 @@ public class UserController extends BaseController {
        }
     }
 
-    @RequestMapping(value = "delete", method = RequestMethod.POST)
+/*    @RequestMapping(value = "delete", method = RequestMethod.POST)
     public String deleteHandler(Model model,HttpServletRequest request,HttpServletResponse response){
         String delIds = request.getParameter("ids");
         String ids[] = delIds.split(",");
@@ -88,11 +88,11 @@ public class UserController extends BaseController {
         } else {
             return ajaxReturn(response,count+"","删除成功",1);
         }
-    }
+    }*/
 
     @RequestMapping(value = "edit")
     public String userpanelHandler(Model model,HttpServletRequest request,HttpServletResponse response,User entity){
-        //TODO
+
         return null;
     }
 
