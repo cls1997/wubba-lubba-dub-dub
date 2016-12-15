@@ -3,9 +3,13 @@ package com.chenls1997.spring.service;
 import com.chenls1997.spring.mapper.SubMapper;
 import com.chenls1997.spring.model.Sub;
 import com.zlzkj.core.mybatis.SqlRunner;
+import com.zlzkj.core.sql.Row;
+import com.zlzkj.core.sql.SQLBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * 订单服务类
@@ -41,6 +45,10 @@ public class SubService {
         return (Sub) mapper.selectByPrimaryKey(id);
     }
 
-    // TODO: 16/12/09
+    public List<Row> getSubsByUserid(Integer id){
+        SQLBuilder sqlBuilder = SQLBuilder.getSQLBuilder(Sub.class);
+        String where = "user_id="+id;
+
+    }
 
 }

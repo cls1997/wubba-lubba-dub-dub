@@ -139,7 +139,7 @@ public class GoodController extends BaseController{
         }
     }
 
-    @RequestMapping(value = "list")
+    @RequestMapping(value = "good_list")
     public String GoodListHandler(Model model,HttpServletRequest request,HttpServletResponse response){
 
         Map<String, Object>	goodList = goodService.getUIGridData(null, UIUtils.getPageParams(request),
@@ -153,7 +153,6 @@ public class GoodController extends BaseController{
             return "good/list";
         }
     }
-
 
     @RequestMapping(value = "type_add")
     public String TypeAddRequest(Types entity,HttpServletRequest request,HttpServletResponse response){
@@ -223,5 +222,4 @@ public class GoodController extends BaseController{
             return ajaxReturn(response,count+"","删除成功",1);
         }
     }
-
 }

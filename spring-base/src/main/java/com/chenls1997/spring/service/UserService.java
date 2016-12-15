@@ -54,21 +54,21 @@ public class UserService {
      */
     public User LoginGetObj(String username,String password){
         HashMap<String, Object> where = new HashMap<String, Object>();
-        where.put("Username",username);
-        where.put("UserPassword",password);
+        where.put("username",username);
+        where.put("password",password);
         SQLBuilder sb = SQLBuilder.getSQLBuilder(User.class);
-        String sql = sb.fields("Userid, Username, UserPassword, Email, Phone, Question, Result, Address, RegTime")
+        String sql = sb.fields("*")
                 .where(where).selectSql();
         List<Row> list = sqlRunner.select(sql);
         if (list.size()>0)
-            return this.findByID(list.get(0).getInt("Userid"));
+            return this.findByID(list.get(0).getInt("id"));
         else
             return null;
     }
 
     public List<Row> getList(){
         String sql = "";
-        List<Row> lst = sqlRunner.select(sql);
+        List<Row> list = sqlRunner.select(sql);
         return null;
     }
 }

@@ -65,6 +65,9 @@ public class UserController extends BaseController {
             System.out.println(username);
             System.out.println(password);
             User entity = userService.LoginGetObj(username,password);
+            request.getSession().setAttribute("username",entity.getUsername());
+            request.getSession().setAttribute("userid",entity.getId());
+
             if (entity==null) {
                 return ajaxReturn(response,null,"登陆失败",0);
             }else {
@@ -73,6 +76,12 @@ public class UserController extends BaseController {
         }else{
             return "user/login";
        }
+    }
+
+    @RequestMapping(value = "logout")
+    public String logoutHandler(HttpServletRequest request,HttpServletResponse response){
+        request.getSession().invalidate();
+        return "public/main";
     }
 
 /*    @RequestMapping(value = "delete", method = RequestMethod.POST)
