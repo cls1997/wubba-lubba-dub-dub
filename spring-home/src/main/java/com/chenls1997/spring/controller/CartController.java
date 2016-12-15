@@ -32,6 +32,6 @@ public class CartController {
     public String list(Model model, HttpServletRequest request, HttpServletResponse response){
         //TODO 2016年12月12日 19:14:28
 
-        return "user/list";
+        return "cart/list";
     }
 }

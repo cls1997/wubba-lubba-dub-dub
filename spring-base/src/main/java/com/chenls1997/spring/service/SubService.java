@@ -48,7 +48,13 @@ public class SubService {
     public List<Row> getSubsByUserid(Integer id){
         SQLBuilder sqlBuilder = SQLBuilder.getSQLBuilder(Sub.class);
         String where = "user_id="+id;
-
+        String sql = sqlBuilder
+                .where(where)
+                .fields("*")
+                .order("ordered_time","asc")
+                .selectSql();
+        List<Row> list = sqlRunner.select(sql);
+        return list;
     }
 
 }
