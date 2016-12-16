@@ -7,3 +7,10 @@
 /spring-common/spring-common.iml
 /spring-home/spring-home.iml
 /spring.iml
+/test-module/test-module.iml
+spring-admin/target/
+spring-base/target/
+spring-common/target/
+spring-home/target/
+test-module/target/
+/out/
