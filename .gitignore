@@ -1,0 +1,8 @@
+# Created by .ignore support plugin (hsz.mobi)
+/spring-home/src/main/resources/jdbc.properties
+/spring-admin/src/main/resources/jdbc.properties
+/.idea/
+/spring-admin/spring-admin.iml
+/spring-base/spring-base.iml
+/spring-common/spring-common.iml
+/spring-home/spring-home.iml

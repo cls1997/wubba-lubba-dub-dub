@@ -1,0 +1,12 @@
+body.p,h1,h2,h3,h4,h5,h6,dl,dd{margin:0;;position: relative;}
+
+body{font-family:"微软雅黑";background: url(../images/bodybg.png);background-attachment: fixed;}
+
+ol,ul{list-style:none;padding:0;margin:0;}
+
+img{border:none;}
+
+a{text-decoration:none;}
+
+input{border: none;}
+
