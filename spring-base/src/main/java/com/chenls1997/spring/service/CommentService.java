@@ -71,6 +71,7 @@ public class CommentService {
         SQLBuilder sqlBuilder = SQLBuilder.getSQLBuilder(Comment.class);
         String where = "good_id=" + gid;
         String sql = sqlBuilder
+                .fields("*")
                 .where(where)
                 .order("id","DESC")
                 .selectSql();

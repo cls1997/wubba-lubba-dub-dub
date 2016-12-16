@@ -14,3 +14,6 @@ spring-common/target/
 spring-home/target/
 test-module/target/
 /out/
+/spring-admin/src/main/resources/log4j.properties
+/spring-admin/src/main/resources/upload.properties
+/spring-base/src/main/resources/generatorConfig.xml
