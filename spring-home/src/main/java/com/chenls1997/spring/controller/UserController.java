@@ -2,6 +2,7 @@ package com.chenls1997.spring.controller;
 
 import com.chenls1997.spring.model.User;
 import com.chenls1997.spring.service.UserService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.zlzkj.core.base.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -105,6 +106,26 @@ public class UserController extends BaseController {
             return ajaxReturn(response,count+"","删除成功",1);
         }
     }*/
+
+    @RequestMapping("forgot")
+    public String forgotHandler(Model model, HttpServletRequest request,HttpServletResponse response){
+        if (request.getMethod().equals("POST")){
+            String username = (String) request.getAttribute("username");
+            String question = (String) request.getAttribute("question");
+            String result = (String) request.getAttribute("result");
+
+            return ajaxReturn(response,
+                    userService.forgetPassword(username,question,result)
+            );
+        } else {
+            return "user/found";
+        }
+    }
+    
+    public String forgot2Handler(Model model){
+        // TODO: 16/12/18 ???
+        return null;
+    }
 
     @RequestMapping(value = "edit")
     public String userpanelHandler(Model model,HttpServletRequest request,HttpServletResponse response,User entity){

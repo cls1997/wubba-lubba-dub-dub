@@ -48,6 +48,20 @@ public class UserService {
         return (User) mapper.selectByPrimaryKey(id);
     }
 
+    public Integer getIdByUsername(String username){
+        String where = "username="+username;
+        SQLBuilder sqlBuilder = SQLBuilder.getSQLBuilder(User.class);
+        String sql = sqlBuilder.fields("id").where(where).selectSql();
+
+        List<Row> result = sqlRunner.select(sql);
+
+        if (result.size()>0){
+            return result.get(0).getInt("id");
+        } else {
+            return null;
+        }
+    }
+
     /**
      * 登录获取对象用
      * @param username
@@ -68,6 +82,18 @@ public class UserService {
             return null;
     }
 
+    public boolean forgetPassword(String username, String question, String result){
+        User u = this.findByID(
+                this.getIdByUsername(username)
+                );
+
+        if (question.equals(u.getQuestion()) && result.equals(u.getResult())){
+            return true;
+        }
+
+        return false;
+    }
+
     public Map<String,Object> getUIGridData(Map<String,Object> where, Map<String,String> pageMap){
         SQLBuilder sqlBuilder = SQLBuilder.getSQLBuilder(User.class);
         String sql = sqlBuilder.fields("id,username,password,email,phone,question,result,address,reg_time")
@@ -80,4 +106,5 @@ public class UserService {
         Integer count = sqlRunner.count(countSql);
         return UIUtils.getGridData(count, list);
     }
+
 }
