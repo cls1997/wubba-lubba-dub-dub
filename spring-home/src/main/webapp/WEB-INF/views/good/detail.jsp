@@ -67,13 +67,16 @@
     <div class="comment">
         <h1>商品评价</h1>
         <ul>
-            <c:forEach items="${commentList}" var="comment">
+            <script type="text/javascript">
+                var commentList = $.post("${z:u('comment/list')}"+${good.id});
+            </script>
+            <c:forEach items="commentList" var="comment">
                 <li>
                     <div>
                         <div class="comtext">${comment.get("content")}</div>
                         <div class="author">
-                            <div class="leftarea"><span>作者：</span>CZS</div>
-                            <div class="rightarea">2016-12-12</div>
+                            <div class="leftarea"><span>作者：</span>${comment.get("author")}</div>
+                            <div class="rightarea">${comment.get("date")}</div>
                         </div>
                     </div>
                 </li>

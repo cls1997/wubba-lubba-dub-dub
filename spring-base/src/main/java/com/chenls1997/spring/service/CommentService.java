@@ -6,6 +6,7 @@ import com.chenls1997.spring.util.UIUtils;
 import com.zlzkj.core.mybatis.SqlRunner;
 import com.zlzkj.core.sql.Row;
 import com.zlzkj.core.sql.SQLBuilder;
+import org.apache.ibatis.jdbc.SQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,7 @@ import java.util.*;
 public class CommentService {
     @Autowired
     private CommentMapper mapper;
+
     @Autowired
     private GoodService goodService;
 
@@ -65,6 +67,17 @@ public class CommentService {
                     goodService.findByID(r.getInt("goodId")).getGoodName());
         }
         return UIUtils.getGridData(count,list);
+    }
+
+    public Integer getCommentCountByGoodId(Integer gid){
+        SQLBuilder sqlBuilder = SQLBuilder.getSQLBuilder(Comment.class);
+        String where = "good_id="+gid;
+        String sql = sqlBuilder
+                .fields("count(*)")
+                .selectSql();
+        return sqlRunner.count(sql);
+
+
     }
 
     public List<Row> getCommentListByGoodId(Integer gid){

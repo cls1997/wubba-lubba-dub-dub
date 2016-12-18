@@ -1,13 +1,15 @@
 package com.chenls1997.spring.controller;
 
+import com.chenls1997.spring.model.Comment;
 import com.chenls1997.spring.model.Good;
+import com.chenls1997.spring.model.User;
 import com.chenls1997.spring.service.CommentService;
 import com.chenls1997.spring.service.GoodService;
 import com.chenls1997.spring.service.TypeService;
+import com.chenls1997.spring.service.UserService;
 import com.chenls1997.spring.util.UploadUtils;
 import com.zlzkj.core.base.BaseController;
 import com.zlzkj.core.sql.Row;
-import org.apache.ibatis.ognl.IntHashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,28 +30,33 @@ import java.util.Map;
 public class GoodController extends BaseController {
     @Autowired
     private GoodService goodService;
-
+    @Autowired
+    private UserService userService;
     @Autowired
     private TypeService typeService;
-
     @Autowired
     private CommentService commentService;
 
-    @RequestMapping(value = "good_view")
+    @RequestMapping(value = "view")
     public String GoodViewHandler(Model model,Integer id,HttpServletRequest request,HttpServletResponse response){
         Map<String, Object> attrs = new HashMap<String, Object>();
         Good ret = goodService.findByID(id);
-        List<Row> commentList = commentService.getCommentListByGoodId(id);
-        Integer commentCount = commentList.size();
+        Integer commentCount = commentService.getCommentCountByGoodId(id);
         String goodTypeName = typeService.findByID(ret.getGoodTypeId()).getName();
+
         attrs.put("good",ret);
         attrs.put("pic_url", UploadUtils.parseFileUrl(ret.getGoodImage()));
-        attrs.put("commentList",commentList);
         attrs.put("commentCount",commentCount);
         attrs.put("goodTypeName",goodTypeName);
 
         model.addAllAttributes(attrs);
 
         return "good/detail";
+    }
+
+    @RequestMapping(value = "getComments")
+    public String CommentGetHandler(Integer id,HttpServletRequest request,HttpServletResponse response){
+        List<Row> commentList = commentService.getCommentListByGoodId(id);
+        return ajaxReturn(response,commentList);
     }
 }

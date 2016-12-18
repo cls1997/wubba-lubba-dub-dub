@@ -1,7 +1,9 @@
 package com.chenls1997.spring.mapper;
 
 import com.chenls1997.spring.model.Type;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface TypeMapper {
     int deleteByPrimaryKey(Integer id);
 
