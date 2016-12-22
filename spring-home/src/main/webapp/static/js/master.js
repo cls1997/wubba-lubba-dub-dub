@@ -187,3 +187,8 @@ $(function(){
     });
 })
 //?????
+$(function(){
+    $("#confirmsub").click(function(){
+        $(".commentbody").toggle(600);
+    });
+})

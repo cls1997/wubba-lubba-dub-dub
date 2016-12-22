@@ -1259,3 +1259,41 @@
 	color: #6699CC;
 	background-color: #FFF;
 }
+.commentbody{
+	display:none;
+	border:solid #F1662D 1px;
+	width: 395px;
+	height: 318px;
+	position: absolute;
+	top: 30%;
+	left: 40%;
+	background-color: #FFF;
+}
+.cm_head{
+	text-indent: 18px;
+	letter-spacing: 25px;
+	height: 50px;
+	background-color: #F1662D;
+	text-align: center;
+	line-height: 50px;
+	font-size: 24px;
+	color: #FFF;
+}
+.cm_msg{
+	margin-top:15px;
+	font-size:20px;
+}
+.commentbody textarea{
+	width:388px;
+	height:150px;
+}
+.commentbody input[type='submit']{
+	background-color: #FFF;
+	border:solid #F1662D 1px;
+	color: #F1662D;
+	font-size: 24px;
+	font-family: "黑体";
+	height: 40px;
+	width:395px;
+	letter-spacing:20px;
+}

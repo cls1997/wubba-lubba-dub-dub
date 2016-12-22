@@ -89,5 +89,15 @@
         </form>
     </div>
 </div>
+<div class="commentbody">
+    <div class="cm_head">评&nbsp;论</div>
+    <div class="cm_body">
+        <div class="cm_msg">确认收货成功！写点评论吧</div>
+        <form action="" method="">
+            <div class="login-mb"><textarea id="commenttext" wrap="physical"></textarea>
+                <div class="login-mb"><input type="submit" id="commentbtn"></div>
+                <form>
+            </div>
+    </div>
 </body>
 </html>
