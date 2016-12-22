@@ -11,7 +11,10 @@
             <c:choose>
                 <c:when test="${username}!=null">
                     <div class="toplog">
-                        欢迎你！${username}
+                        <li>欢迎你！${username}</li>
+                        <a id="exit">
+                            <li>退出</li>
+                        </a>
                     </div>
                 </c:when>
                 <c:otherwise>
