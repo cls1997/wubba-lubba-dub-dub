@@ -455,6 +455,7 @@
 }
 
 .detitle{
+	width: 350px;
 	margin: 30px 0;
 	font-size: 22px;
 	color: black;
@@ -1072,7 +1073,7 @@
 
 .saphone{
 	color: #696969;
-	font-size: 16px;
+	font-style: 16px;
 	margin-bottom: 130px;
 }
 
@@ -1215,4 +1216,46 @@
 }
 .ordertime > span{
 	color: #B12504;
+}
+.sellbody{
+	width: 500px;
+	margin: 20px auto;
+}
+
+.sell-mb{
+	width: 500px;
+	margin: 30px auto;
+	height: 30px;
+	font-size: 28px;
+	color: #696969;
+}
+
+.sellbody input[type='text']{
+	width: 500px;
+	height: 50px;
+	background-color: #F5F5F5;
+	border:solid #6699CC 1px;
+	font-size: 24px;
+	text-indent: 5px;
+}
+
+.sellbody input[type='password']{
+	width: 500px;
+	height: 50px;
+	background-color: #F5F5F5;
+	border:solid #6699CC 1px;
+	font-size: 24px;
+	text-indent: 5px;
+}
+
+.sellbody input[type='submit']{
+	font-family: "黑体";
+	margin : 60px auto;
+	width: 500px;
+	height: 60px;
+	border:solid #6699CC 2px;
+	font-size: 32px;
+	letter-spacing: 22px;
+	color: #6699CC;
+	background-color: #FFF;
 }
