@@ -1,13 +1,17 @@
 package com.chenls1997.spring.controller;
 
+import com.chenls1997.spring.Constants;
 import com.chenls1997.spring.model.User;
 import com.chenls1997.spring.service.UserService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.zlzkj.core.base.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,76 +24,77 @@ import java.util.Date;
  */
 @Controller
 @RequestMapping(value = "user")
+@SessionAttributes({
+        Constants.username,
+        Constants.userId,
+        Constants.user
+})
 public class UserController extends BaseController {
     @Autowired
     private UserService userService;
 
     /**
      * 用户登陆
+     *
      * @param entity\
      * @return
      */
     @RequestMapping(value = "register")
-    public String registerHandler(User entity, HttpServletRequest request, HttpServletResponse response){
-        if (request.getMethod().equals("POST")) {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String confirm = request.getParameter("confirmpassword");
+    public String registerHandler(User entity, HttpServletRequest request, HttpServletResponse response,
+                                  @RequestParam String username,
+                                  @RequestParam String password,
+                                  @RequestParam("confirmpassword")
+                                          String confirm) {
+        if (username == null || password == null || confirm == null || !password.equals(confirm))
+            return ajaxReturn(response, null, "注册失败", 0);
 
-            if (username==null||password==null||confirm==null||!password.equals(confirm))
-                return ajaxReturn(response,null,"注册失败",0);
+        entity.setPassword(password);
+        entity.setUsername(username);
+        Date date = new Date();
+        Timestamp timestamp = new Timestamp(date.getTime());
+        entity.setRegTime(timestamp);
 
-            entity.setPassword(password);
-            entity.setUsername(username);
-            Date date = new Date();
-            Timestamp timestamp = new Timestamp(date.getTime());
-            entity.setRegTime(timestamp);
-
-            Integer status=null;
-            try{
-                status = userService.save(entity);
-            }catch (Exception e){
-                return ajaxReturn(response,null,e.getLocalizedMessage(),-1);
-            }
-            if(status==0){
-                return ajaxReturn(response,null,"注册失败",0);
-            }else {
-                return ajaxReturn(response,null,"注册成功",1);
-            }
-        }else{
-            return "user/register";
+        Integer status = null;
+        try {
+            status = userService.save(entity);
+        } catch (Exception e) {
+            return ajaxReturn(response, null, e.getLocalizedMessage(), -1);
+        }
+        if (status == 0) {
+            return ajaxReturn(response, null, "注册失败", 0);
+        } else {
+            return ajaxReturn(response, null, "注册成功", 1);
         }
     }
+
     /**
-     *  用户登陆
-     *  @param model
-     *  @return
+     * 用户登陆
+     *
+     * @param model
+     * @return
      */
     @RequestMapping(value = "login")
-    public String loginHandler(Model model,HttpServletRequest request,HttpServletResponse response) {
-        if(request.getMethod().equals("POST")){
-            String username = (String)request.getParameter("username");
-            String password = (String)request.getParameter("userpassword");
-            System.out.println(username);
-            System.out.println(password);
-            User entity = userService.LoginGetObj(username,password);
+    public String loginHandler(Model model, HttpServletRequest request, HttpServletResponse response,
+                               @RequestParam String username,
+                               @RequestParam String password) {
+        System.out.println(username);
+        System.out.println(password);
+        User entity = userService.LoginGetObj(username, password);
 
-            if (entity==null) {
-                return ajaxReturn(response,null,"登陆失败",0);
-            }else {
-                request.getSession().setAttribute("username",entity.getUsername());
-                request.getSession().setAttribute("userid",entity.getId());
-                return ajaxReturn(response,entity,"登陆成功",1);
-            }
-        }else{
-            return "user/login";
-       }
+        if (entity == null) {
+            return ajaxReturn(response, null, "登陆失败", 0);
+        } else {
+            model.addAttribute(Constants.username, entity.getUsername());
+            model.addAttribute(Constants.userId, entity.getId());
+            model.addAttribute(Constants.user, entity);
+            return ajaxReturn(response, entity, "登陆成功", 1);
+        }
     }
 
     @RequestMapping(value = "logout")
-    public String logoutHandler(HttpServletRequest request,HttpServletResponse response){
-        request.getSession().invalidate();
-        return "public/main";
+    public String logoutHandler(HttpServletRequest request, HttpServletResponse response, SessionStatus ss) {
+        ss.setComplete();
+        return "index/index";
     }
 
 /*    @RequestMapping(value = "delete", method = RequestMethod.POST)
@@ -108,29 +113,38 @@ public class UserController extends BaseController {
     }*/
 
     @RequestMapping("forgot")
-    public String forgotHandler(Model model, HttpServletRequest request,HttpServletResponse response){
-        if (request.getMethod().equals("POST")){
+    public String forgotHandler(Model model, HttpServletRequest request, HttpServletResponse response) {
+        if (request.getMethod().equals("POST")) {
             String username = (String) request.getAttribute("username");
             String question = (String) request.getAttribute("question");
             String result = (String) request.getAttribute("result");
 
             return ajaxReturn(response,
-                    userService.forgetPassword(username,question,result)
+                    userService.forgetPassword(username, question, result)
             );
         } else {
             return "user/found";
         }
     }
-    
-    public String forgot2Handler(Model model){
+
+    public String forgot2Handler(Model model) {
         // TODO: 16/12/18 ???
         return null;
     }
 
-    @RequestMapping(value = "edit")
-    public String userpanelHandler(Model model,HttpServletRequest request,HttpServletResponse response,User entity){
-
-        return null;
+    @RequestMapping(value = "user")
+    public String userpanelHandler(Model model, HttpServletRequest request, HttpServletResponse response) {
+        model.addAttribute("user", userService.findByID(
+                (Integer) request.getSession().getAttribute(Constants.userId)
+        ));
+        return "user/user";
     }
 
+    @RequestMapping(value = "userp")
+    public String userPostHandler(Model model,HttpServletRequest request,HttpServletResponse response,
+                                  @RequestParam User entity){
+        System.out.println(entity.toString());
+        userService.save(entity);
+        return ajaxReturn(response,null);
+    }
 }

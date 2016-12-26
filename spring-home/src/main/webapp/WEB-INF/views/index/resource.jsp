@@ -10,3 +10,6 @@
 
 <script type="text/javascript" src="${__static__}/js/jquery.js"></script>
 <script type="text/javascript" src="${__static__}/js/master.js"></script>
+<script type="text/javascript" src="${__static__}/js/urls.js"></script>
+<script type="text/javascript" src="${__static__}/js/utils.js"></script>
+

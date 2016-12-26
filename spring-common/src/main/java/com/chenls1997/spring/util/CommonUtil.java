@@ -485,10 +485,8 @@ public class CommonUtil {
 				try {
 					objVal = StringUtil.objectToString(field.get(obj));
 				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				hashMap.put(field.getName(), objVal);

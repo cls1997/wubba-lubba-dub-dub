@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 订单服务类
@@ -47,7 +49,23 @@ public class SubService {
 
     public List<Row> getSubsByUserid(Integer id){
         SQLBuilder sqlBuilder = SQLBuilder.getSQLBuilder(Sub.class);
-        String where = "user_id="+id;
+        Map<String,Object> where = new HashMap<>();
+        where.put("user_id",id);
+        where.put("state",1);
+        String sql = sqlBuilder
+                .where(where)
+                .fields("*")
+                .order("ordered_time","asc")
+                .selectSql();
+        List<Row> list = sqlRunner.select(sql);
+        return list;
+    }
+
+    public List<Row> getOutdatedSubsByUserid(Integer id){
+        SQLBuilder sqlBuilder = SQLBuilder.getSQLBuilder(Sub.class);
+        Map<String,Object> where = new HashMap<>();
+        where.put("user_id",id);
+        where.put("state",0);
         String sql = sqlBuilder
                 .where(where)
                 .fields("*")

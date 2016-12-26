@@ -247,7 +247,7 @@ public class UploadUtils {
 	 * 【errorMsg::status=-1时的错误信息】
 	 * 【uploadedSize::已上传的文件大小】
 	 * 【saveName::status=2时的文件保存名，不含路径】
-	 * TODO 传递InputStream会不会增加内容开销还需观察
+	 * TO/DO 传递InputStream会不会增加内容开销还需观察
 	 */
 	public static Map<String,Object> saveInputStream(InputStream in,String token,String rangeHeaderString){
 
@@ -395,7 +395,7 @@ public class UploadUtils {
 	 */
 	public static String saveFile(File file,String newSaveName){
 		
-		// TODO 获取扩展名,考虑采用扩展名建文件夹分类保存
+		// TO/DO 获取扩展名,考虑采用扩展名建文件夹分类保存
 		
 		String fullFileName = getFullSavePath(newSaveName) + File.separator + newSaveName;
 		
@@ -438,7 +438,7 @@ public class UploadUtils {
 		//根据上传完成的系统时间生成新的文件名
 		String fileName = n2s(getNowTimestamp()) + "_!!" + fileNameSuffix;
 		
-		// TODO 验证生成的文件名是否重复
+		// TO/DO 验证生成的文件名是否重复
 		//若文件存在则重新生成
 //		if(file.exists()){
 //			generateNewSaveNameByToken(token);
@@ -504,7 +504,7 @@ public class UploadUtils {
 		if(saveName==null || saveName.isEmpty()){
 			return "";
 		}
-		//TODO 验证文件名格式
+		//TO/DO 验证文件名格式
 		//veuUIfkMNj_!!98546725.mp4
 		String timestampStr = saveName.substring(0,10);
 		int timestamp = s2n(timestampStr);

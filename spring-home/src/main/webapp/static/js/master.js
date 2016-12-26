@@ -1,5 +1,5 @@
-// 控制登录注册框value值
-$(function(){ 
+
+function uload(){
     var text;
     $(".userinput").focus(function() {
         text = $(this).val();
@@ -8,9 +8,9 @@ $(function(){
     $(".userinput").blur(function() {
         $(this).val()!="" || $(this).val(text);
     });
-})
+}
 
-   $(function(){  
+function pload(){
     var text="请输入您的密码";
     $(".passwordinput").focus(function() {
         $(this).val("");
@@ -20,9 +20,9 @@ $(function(){
         $(this).val()!="" || $(this).val(text);
         $(this).val()!=text || $(this).attr('type','text');
     });
-})
+}
 
- $(function(){  
+function p2load(){
     var text="请确认您的密码";
     $(".passwordinput2").focus(function() {
         $(this).val("");
@@ -32,16 +32,118 @@ $(function(){
         $(this).val()!="" || $(this).val(text);
         $(this).val()!=text || $(this).attr('type','text');
     });
+}
+
+$(function () {
+    $("#logoutbtn").click(function () {
+        $.post(urls.logout);
+        window.location.reload();
+    })
 })
- 
+
  //点击登录弹窗
 $(function(){
-    $("#loginbtn").click(function(){$("#logbody").toggle(600);});
-})
+    $("#loginbtn").click(function(){
+        $("#logbody").toggle(600);
+        $("#logbody").load("/static/html/login.html",function () {
+            uload();
+            pload();
+            $("#loginsubmit").click(function(){
+
+                var username = $("#input_username").val();
+                var password = $("#input_password").val();
+                //todo replace
+                if (true){
+                    var data = {
+                        "username":username,
+                        "password":password
+                    }
+                    var settings={
+                        url : urls.login,
+                        data: data,
+                        success: function (r) {
+                            alert("func");
+                            $("#logbody").load("/static/html/info.html",
+                                function () {
+                                    alert("fun");
+                                    $("#content").val(r.info);
+
+                                    $("#okbtn").click(function () {
+                                    })
+                                }
+                            )
+                        },
+                        type: "POST",
+                        dataType: "json"
+                    }
+
+                    $.ajax(settings);
+                }
+            });
+        });
+    });
+});
+
 //注册弹窗
 $(function(){
-    $("#registerbtn").click(function(){$("#regbody").toggle(600);});
-})
+    $("#registerbtn").click(function(){
+        $("#logbody").toggle(600);
+        $("#logbody").load("/static/html/register.html",function () {
+            uload();
+            pload();
+            p2load();
+            $("#registersubmit").click(function(){
+                var username = $("#input_username").val();
+                var password = $("#input_password").val();
+                var confirmpassword = $("#input_confirmpassword").val();
+                //todo replace
+                if (alert_and_false(username,password,confirmpassword)){
+                    var data = {
+                        "username":username,
+                        "password":password,
+                        "confirmpassword":confirmpassword
+                    }
+                    var settings={
+                        url : urls.register,
+                        data: data,
+                        success: function (r) {
+                            $("#logbody").load("/static/html/info.html",
+                                function () {
+                                    $("#content").val(r.info);
+                                    $("#okbtn").click(function () {
+                                        window.location.reload();
+                                    })
+                                }
+                            )
+                        },
+                        type: "POST",
+                        dataType: "json"
+                    }
+
+                    $.ajax(settings);
+                }
+            });
+        });
+    });
+});
+
+//todo delete this function
+function alert_and_false(u,p,c) {
+    alert("alert");
+    return false;
+}
+
+function ajaxError(e) {
+
+}
+
+function login_check(username,password) {
+    //TODO 数据验证
+}
+
+function register_check(username,password,confirmpassword) {
+    //TODO 数据验证
+}
 
 //banner标题效果
 $(function(){

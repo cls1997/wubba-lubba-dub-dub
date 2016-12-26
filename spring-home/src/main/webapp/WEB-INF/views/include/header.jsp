@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.chenls1997.spring.Constants" %>
 <%@ taglib prefix="z" uri="http://zlzkj.com/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -8,16 +9,14 @@
             <a href="#" target="_blank">
                 <li>我要卖</li>
             </a>
-            <c:choose>
-                <c:when test="${username}!=null">
+            <% if (request.getAttribute(Constants.user)!=null) {%>
                     <div class="toplog">
-                        <li>欢迎你！${username}</li>
-                        <a id="exit">
+                        <li>欢迎你！${requestScope.username}</li>
+                        <a id="logoutbtn">
                             <li>退出</li>
                         </a>
                     </div>
-                </c:when>
-                <c:otherwise>
+            <% } else { %>
                     <div id="section-login" class="toplog">
                         <a id="loginbtn">
                             <li>登录</li>
@@ -26,8 +25,7 @@
                             <li>注册</li>
                         </a>
                     </div>
-                </c:otherwise>
-            </c:choose>
+            <% } %>
         </ul>
 
         <div class="topsvc">
@@ -36,11 +34,11 @@
                     <li>个人中心</li>
                 </a>
                 <!--	sha bi cls <a href="#"><li>消息</li></a></a> -->
-                <a href="#" target="_blank">
+                <a href="${z:u('sub/list')}" target="_blank">
                     <li>我的订单</li>
                 </a>
                 <li>
-                    <a href="#" target="_blank">
+                    <a href="${z:u('cart/list')}" target="_blank">
                         <div class="topcar">我的购物车</div>
                     </a>
                 </li>

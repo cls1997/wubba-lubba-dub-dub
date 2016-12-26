@@ -15,11 +15,20 @@
 	
 
 	
-		<!-- 拦截器配置 -->
+	<!-- 拦截器配置 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="com.zlzkj.core.base.BaseInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="com.chenls1997.spring.interceptor.MainInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/cart/*"/>
+			<bean class="com.chenls1997.spring.interceptor.LoginInterceptor"/>
+			<!-- TODO:  this would not work-->
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
