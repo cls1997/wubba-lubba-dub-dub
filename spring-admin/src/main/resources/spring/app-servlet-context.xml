@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
 	<!-- 启用SpringMVC的注解功能,它会自动注册HandlerMapping、HandlerAdapter、ExceptionResolver的相关实例 -->
@@ -12,9 +11,10 @@
 	
 	<!-- spring mvc配置中只扫描Controller，其他交给root上下文配置扫描 -->
 	<context:component-scan base-package="com.chenls1997.spring.controller" />
-	
 
-	
+	<!-- 静态文件访问 -->
+	<mvc:resources mapping="/static/**" location="/static/" />
+
 	<!-- 拦截器配置 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
@@ -26,15 +26,12 @@
 			<bean class="com.chenls1997.spring.interceptor.MainInterceptor"/>
 		</mvc:interceptor>
 		<mvc:interceptor>
-			<mvc:mapping path="/cart/*"/>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/static/**"/>
 			<bean class="com.chenls1997.spring.interceptor.LoginInterceptor"/>
-			<!-- TODO:  this would not work-->
 		</mvc:interceptor>
 	</mvc:interceptors>
-	
-	<!-- 静态文件访问 -->
-	<mvc:resources mapping="/static/**" location="/static/" />
-	
+
 	<!-- 配置SpringMVC的视图解析器，默认就是JSP -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" /> -->
@@ -44,9 +41,9 @@
 
 	<!-- 支持文件上传 -->
 	<bean id="multipartResolver" class="com.zlzkj.core.base.MyMultipartResolver">
-		<property name="defaultEncoding" value="utf-8"></property>	
+		<property name="defaultEncoding" value="utf-8" />
 <!-- 		设置上传文件的最大尺寸 -->
-		<property name="maxUploadSize" value="1024000000"></property>
+		<property name="maxUploadSize" value="1024000000" />
 		<property name="excludeUrl">  
             <list>  
 <!--               如果请求中包含以下路径，则不进行拦截   -->

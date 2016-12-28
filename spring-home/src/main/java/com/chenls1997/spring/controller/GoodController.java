@@ -6,7 +6,6 @@ import com.chenls1997.spring.service.GoodService;
 import com.chenls1997.spring.service.TypeService;
 import com.chenls1997.spring.service.UserService;
 import com.chenls1997.spring.util.UploadUtils;
-import com.zlzkj.core.base.BaseController;
 import com.zlzkj.core.sql.Row;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,12 +29,17 @@ import java.util.Map;
 @SessionAttributes("userId")
 @RequestMapping(value = "good")
 public class GoodController extends BaseController {
+    private final GoodService goodService;
+    private final TypeService typeService;
+    private final CommentService commentService;
+
     @Autowired
-    private GoodService goodService;
-    @Autowired
-    private TypeService typeService;
-    @Autowired
-    private CommentService commentService;
+    public GoodController(HttpSession httpSession, CommentService commentService, GoodService goodService, TypeService typeService) {
+        super(httpSession);
+        this.commentService = commentService;
+        this.goodService = goodService;
+        this.typeService = typeService;
+    }
 
     @RequestMapping(value = "{goodid}")
     public String GoodViewHandler(Model model, @PathVariable("goodid") Integer id, HttpServletRequest request, HttpServletResponse response) {

@@ -3,7 +3,6 @@ package com.chenls1997.spring.controller;
 import com.chenls1997.spring.Constants;
 import com.chenls1997.spring.model.User;
 import com.chenls1997.spring.service.UserService;
-import com.zlzkj.core.base.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -30,8 +30,13 @@ import java.util.Date;
         Constants.user
 })
 public class UserController extends BaseController {
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public UserController(HttpSession httpSession, UserService userService) {
+        super(httpSession);
+        this.userService = userService;
+    }
 
     /**
      * 用户登陆

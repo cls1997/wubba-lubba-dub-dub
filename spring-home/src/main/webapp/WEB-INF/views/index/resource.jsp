@@ -9,7 +9,8 @@
 <link rel="stylesheet" type="text/css" href="${__static__}/css/master.css">
 
 <script type="text/javascript" src="${__static__}/js/jquery.js"></script>
-<script type="text/javascript" src="${__static__}/js/master.js"></script>
-<script type="text/javascript" src="${__static__}/js/urls.js"></script>
-<script type="text/javascript" src="${__static__}/js/utils.js"></script>
+
+<script type="text/javascript" src="${__static__}/js/master.js?v=1"></script>
+<script type="text/javascript" src="${__static__}/js/urls.js?v=1"></script>
+<script type="text/javascript" src="${__static__}/js/utils.js?v=1"></script>
 

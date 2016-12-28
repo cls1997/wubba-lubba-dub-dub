@@ -9,9 +9,9 @@
             <a href="#" target="_blank">
                 <li>我要卖</li>
             </a>
-            <% if (request.getAttribute(Constants.user)!=null) {%>
+            <% if (!request.getAttribute("username").equals(Constants.nullUsername)) {%>
                     <div class="toplog">
-                        <li>欢迎你！${requestScope.username}</li>
+                        <li>欢迎你！${requestScope.get("username")}</li>
                         <a id="logoutbtn">
                             <li>退出</li>
                         </a>

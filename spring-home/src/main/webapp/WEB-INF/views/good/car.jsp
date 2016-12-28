@@ -28,6 +28,7 @@
     <c:if test="${cart.size()==0}">
         <div class="carbody">
             <span>您的购物车为空</span>
+            <span>${cart.size()}</span>
         </div>
     </c:if>
     <c:forEach items="${cart}" var="item">
@@ -35,21 +36,21 @@
         <div class="carbdimg"><img src="${__static__}/images/goodtest.png"></div>
         <div class="carbdmsg">
             <ul>
-                <li class="carbdtitle">${item.get("good_name")}</li>
-                <li class="carbdtype">标签：<div>${item.get("type_name")}</div></li>
-                <li class="carbdstork">库存：${item.get("good_stock")}</li>
-                <li class="carbddelete"><a href="${z:u('')}+?id=${cart.get("good_id")}"> 删除</a></li>
+                <li class="carbdtitle">${item.getString("good_name")}</li>
+                <li class="carbdtype">标签：<div>${item.getString("type_name")}</div></li>
+                <li class="carbdstork">库存：${item.getInt("good_stock")}</li>
+                <li class="carbddelete"><a href="javascript:deleteCar(${item.getInt("id")});"> 删除</a></li>
             </ul>
         </div>
-        <div class="carbdprice">￥120.00</div>
+        <div class="carbdprice"><fmt:formatNumber type="currency">${item.getDouble("good_price")}</fmt:formatNumber> </div>
         <div class="carbdnum">1</div>
     </div>
     </c:forEach>
     <div class="carfooter">
         <div class="leftarea">购物车可以暂存您的商品，并且显示商品的最新价格。</div>
-        <div class="rightarea" id="carshopbtn">结算</div>
+        <div class="rightarea" id="carshopbtn" onclick="checkout()">结算</div>
         <div class="rightarea" id="cartotalprice">
-            小计（${count}件商品）：<span><fmt:formatNumber value="${price}" type="currency"/></span>
+            小计（${count}件商品）：<span><fmt:formatNumber type="currency">${price}</fmt:formatNumber></span>
         </div>
     </div>
 </div>
@@ -57,5 +58,18 @@
 </div>
 
 <%@include file="../include/footer.jsp"%>
+
+<script>
+    function checkout() {
+        $.post(urls.carCheckout,function (r) {
+
+        });
+    }
+
+    function deleteCar(a) {
+        alert(urls.carDelete);
+        $.post(urls.carDelete,{ id: a });
+    }
+</script>
 </body>
 </html>

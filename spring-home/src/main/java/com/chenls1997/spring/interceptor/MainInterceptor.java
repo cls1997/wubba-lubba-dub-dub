@@ -18,13 +18,16 @@ public class MainInterceptor implements HandlerInterceptor {
     private HttpSession httpSession;
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        //Get current user from session
         User u = (User) httpSession.getAttribute(Constants.user);
 
+        //Set request attribute
         request.setAttribute(Constants.user, u);
-        if (u != null) {
-            request.setAttribute(Constants.username, u.getUsername());
-            request.setAttribute(Constants.userId, u.getId());
-        }
+        request.setAttribute(Constants.username, u!=null?u.getUsername():Constants.nullUsername);
+        request.setAttribute(Constants.userId, u!=null?u.getId():null);
+
+        //System.out.println(u+"\n"+request.getAttribute(Constants.username)+" "+request.getAttribute(Constants.userId));
+
         return true;
     }
 

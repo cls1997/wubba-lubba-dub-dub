@@ -21,7 +21,7 @@
         <div class="dgimg"><img src="${pic_url}"></div>
         <div class="detitle">${good.goodName}</div>
         <div class="goodspan">
-            <div class="goodtype">标签：<div >${goodTypeName}</div></div>
+            <div class="goodtype">标签：<div>${goodTypeName}</div></div>
             <div class="deprice">价格：<span class="pricenum">${good.goodPrice}</span></div>
             <div class="city">物流：<span>上海市</span> 运至 <span>浙江 杭州</span></div>
             <div class="commennum">

@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: touka
@@ -21,35 +22,35 @@
     <div class="shopleft">
         <div class="sgtitle">商品信息</div>
         <div class="sgbody">
-            <div class="sgimg"><img src="images/goodtest.png"></div>
+            <div class="sgimg"><img src=""></div>
             <div class="sgmsg">
                 <ul>
-                    <li class="sgmsg1">三只松鼠 夏威夷果200g</li>
-                    <li class="sgmsg2"><div>坚果</div></li>
-                    <li class="sgmsg3">3件&nbsp;<span>共￥120.00</span></li>
+                    <li class="sgmsg1">喵喵喵</li>
+                    <li class="sgmsg2">
+                        test
+                    </li>
+                    <li class="sgmsg3">2件&nbsp;
+                        <span>共<fmt:formatNumber type="currency">123</fmt:formatNumber></span></li>
                 </ul>
             </div>
         </div>
-        <div class="sgbody">
-            <div class="sgimg"><img src="images/goodtest.png"></div>
-            <div class="sgmsg">
-                <ul>
-                    <li class="sgmsg1">三只松鼠 夏威夷果200g</li>
-                    <li class="sgmsg2"><div>坚果</div></li>
-                    <li class="sgmsg3">3件&nbsp;<span>共￥120.00</span></li>
-                </ul>
+        <c:forEach items="${checkouts}" var="item" varStatus="i">
+            <div class="sgbody">
+                <div class="sgimg"><img src="${item.get("goodId")}"></div>
+                <div class="sgmsg">
+                    <ul>
+                        <li class="sgmsg1">${item.get("goodId")}</li>
+                        <li class="sgmsg2">
+                            <div>
+                                ${item.get("goodId")}
+                            </div>
+                        </li>
+                        <li class="sgmsg3">${item.get("orderCount")}件&nbsp;
+                            <span>共<fmt:formatNumber type="currency">${item.getDouble("orderPrice")*item.getInt("orderCount")}</fmt:formatNumber></span></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="sgbody">
-            <div class="sgimg"><img src="images/goodtest.png"></div>
-            <div class="sgmsg">
-                <ul>
-                    <li class="sgmsg1">三只松鼠 夏威夷果200g</li>
-                    <li class="sgmsg2"><div>坚果</div></li>
-                    <li class="sgmsg3">3件&nbsp;<span>共￥120.00</span></li>
-                </ul>
-            </div>
-        </div>
+        </c:forEach>
     </div>
     <div class="shopright">
         <div class="satitle">您的收货地址：</div>
@@ -59,11 +60,17 @@
         <div class="sashopbtn">购买</div>
     </div>
 </div>
-
+<%@include file="../include/footer.jsp"%>
 <div class="login" id="logbody">
 </div>
 
-<%@include file="../include/footer.jsp"%>
+<!--
+/*
+ * TODO 布局有问题
+ * Time: 16/12/29 3:29
+ * Creator: Chenls
+ */ 
+-->
 
 </body>
 </html>

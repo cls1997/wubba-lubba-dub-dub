@@ -5,6 +5,7 @@ import com.chenls1997.spring.model.Cart;
 import com.zlzkj.core.mybatis.SqlRunner;
 import com.zlzkj.core.sql.Row;
 import com.zlzkj.core.sql.SQLBuilder;
+import org.apache.ibatis.jdbc.SQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -46,26 +47,29 @@ public class CartService {
         return (Cart) mapper.selectByPrimaryKey(id);
     }
 
+    public Row rowFindByID(Integer id){
+        SQLBuilder sqlBuilder = SQLBuilder.getSQLBuilder(Cart.class);
+        String where = "id=" + id;
+        String sql = sqlBuilder
+                .fields("*")
+                .where(where)
+                .selectSql();
+        List<Row> list = sqlRunner.select(sql);
+        if (!list.isEmpty())
+            return list.get(0);
+
+        return null;
+    }
+
     public List<Row> findByUserid(Integer id){
         SQLBuilder sqlBuilder = SQLBuilder.getSQLBuilder(Cart.class);
         String where = "user_id=" + id;
         String sql = sqlBuilder
                 .fields("*")
                 .where(where)
-                .order("id","DESC")
+                .order("id","ASC")
                 .selectSql();
         List<Row> lst = sqlRunner.select(sql);
         return lst;
     }
-
-    public List<Integer> deleteByUserid(Integer id){
-        List<Integer> ret = new ArrayList<>();
-        List<Row> lst = this.findByUserid(id);
-        for (Row r : lst) {
-            ret.add(this.delete(r.getInt(id)));
-        }
-        return ret;
-    }
-
-    // TODO: 16/12/09
 }

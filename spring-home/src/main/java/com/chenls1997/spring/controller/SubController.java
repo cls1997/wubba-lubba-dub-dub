@@ -2,11 +2,15 @@ package com.chenls1997.spring.controller;
 
 import com.chenls1997.spring.Constants;
 import com.chenls1997.spring.model.Sub;
+import com.chenls1997.spring.model.User;
+import com.chenls1997.spring.service.CartService;
 import com.chenls1997.spring.service.GoodService;
 import com.chenls1997.spring.service.SubService;
+import com.chenls1997.spring.service.UserService;
 import com.chenls1997.spring.util.UploadUtils;
-import com.zlzkj.core.base.BaseController;
+
 import com.zlzkj.core.sql.Row;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -23,11 +28,17 @@ import java.util.List;
 @Controller
 @RequestMapping("sub")
 public class SubController extends BaseController {
-    @Autowired
-    private SubService subService;
+    private final SubService subService;
+    private final CartService cartService;
+    private final GoodService goodService;
 
     @Autowired
-    private GoodService goodService;
+    public SubController(HttpSession httpSession, CartService cartService, SubService subService, GoodService goodService) {
+        super(httpSession);
+        this.cartService = cartService;
+        this.subService = subService;
+        this.goodService = goodService;
+    }
 
     @RequestMapping(value = "list")
     public String subViewHandler(Model model, HttpServletRequest request, HttpServletResponse response){
@@ -55,6 +66,19 @@ public class SubController extends BaseController {
         model.addAttribute("subs",subs);
         model.addAttribute("outdatedSubs",outdatedSubs);
         return "good/sub";
+    }
+
+    @RequestMapping(value = "buynow")
+    public String buynowHandler(Model model,HttpServletRequest request,HttpServletResponse response,
+                                @RequestParam Integer goodId,
+                                @RequestParam Integer orderCount){
+
+        return ajaxReturn(response,null);
+    }
+
+    @RequestMapping(value = "checkout")
+    public String checkoutHandler(Model model,HttpServletRequest request,HttpServletResponse response){
+        return null;
     }
 
 }

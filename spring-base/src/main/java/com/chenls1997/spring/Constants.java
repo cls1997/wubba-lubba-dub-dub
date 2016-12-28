@@ -8,4 +8,6 @@ public class Constants {
     public static final String userId = "userId";
     public static final String username = "username";
     public static final String user = "user";
+
+    public static final String nullUsername = "";
 }
