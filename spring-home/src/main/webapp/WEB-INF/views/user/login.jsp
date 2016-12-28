@@ -11,10 +11,7 @@
     <%@include file="../index/resource.jsp"%>
 </head>
 <body>
-<button id="loginbtn">123</button>
-<div id="logbody">
-
-</div>
+<p align="center">需要登陆</p>
 <script>
 </script>
 </body>

@@ -103,9 +103,9 @@ $(function(){
                 //todo replace
                 if (alert_and_false(username,password,confirmpassword)){
                     var data = {
-                        "username":username,
-                        "password":password,
-                        "confirmpassword":confirmpassword
+                        "xusername":username,
+                        "xpassword":password,
+                        "xconfirmpassword":confirmpassword
                     }
                     var settings={
                         url : urls.register,

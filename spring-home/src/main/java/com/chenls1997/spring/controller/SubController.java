@@ -10,6 +10,7 @@ import com.chenls1997.spring.service.SubService;
 import com.chenls1997.spring.service.UserService;
 import com.chenls1997.spring.util.UploadUtils;
 
+import com.chenls1997.spring.utils.LoginType;
 import com.zlzkj.core.sql.Row;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +42,8 @@ public class SubController extends BaseController {
         this.goodService = goodService;
     }
 
+    @Login(LoginType.page)
     @RequestMapping(value = "list")
-    @Login
     public String subViewHandler(Model model, HttpServletRequest request, HttpServletResponse response){
         List<Row> subs = subService.getSubsByUserid (this.getCurrentUserId());
         List<Row> outdatedSubs = subService.getOutdatedSubsByUserid(this.getCurrentUserId());

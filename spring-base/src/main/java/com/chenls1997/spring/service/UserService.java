@@ -49,7 +49,7 @@ public class UserService {
     }
 
     public Integer getIdByUsername(String username){
-        String where = "username="+username;
+        String where = "username=\'"+username+"\'";
         SQLBuilder sqlBuilder = SQLBuilder.getSQLBuilder(User.class);
         String sql = sqlBuilder.fields("id").where(where).selectSql();
 
@@ -108,7 +108,7 @@ public class UserService {
     }
 
     public boolean check(String username){
-        String where = "username="+username;
+        String where = "username=\'"+username+"\'";
         SQLBuilder sqlBuilder = SQLBuilder.getSQLBuilder(User.class);
         String sql = sqlBuilder.fields("id").where(where).selectSql();
 

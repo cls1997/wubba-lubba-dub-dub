@@ -38,20 +38,23 @@ public class UserController extends BaseController {
     /**
      * 用户登陆
      *
-     * @param entity\
+     * @param
      * @return
      */
     @RequestMapping(value = "register")
-    public String registerHandler(User entity, HttpServletRequest request, HttpServletResponse response,
-                                  @RequestParam String username,
-                                  @RequestParam String password,
-                                  @RequestParam("confirmpassword")
-                                          String confirm) {
-        if (username == null || password == null || confirm == null || !password.equals(confirm)||!userService.check(username))
+    public String registerHandler(HttpServletRequest request, HttpServletResponse response,
+                                  @RequestParam String xusername,
+                                  @RequestParam String xpassword,
+                                  @RequestParam("xconfirmpassword") String confirm) {
+
+        System.out.println("boolean+"+ (xusername == null) +" "+ (xpassword == null) +" "+ (confirm == null) +
+                " "+ (!xpassword.equals(confirm)) +" "+ (!userService.check(xusername)));
+        if (xusername == null || xpassword == null || confirm == null || !xpassword.equals(confirm)||userService.check(xusername))
             return ajaxReturn(response, null, "注册失败", 0);
 
-        entity.setPassword(password);
-        entity.setUsername(username);
+        User entity = new User();
+        entity.setPassword(xpassword);
+        entity.setUsername(xusername);
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
         entity.setRegTime(timestamp);
