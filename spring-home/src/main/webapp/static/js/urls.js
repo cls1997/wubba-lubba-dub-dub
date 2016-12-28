@@ -5,5 +5,6 @@ var urls ={
     tocar: "/cart/add",
     carDelete: "/cart/delete",
     buynow: "",
-    carCheckout: ""
+    carCheckout: "",
+    usersave: "/user/usersave"
 };

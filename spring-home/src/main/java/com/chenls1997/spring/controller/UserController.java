@@ -1,6 +1,7 @@
 package com.chenls1997.spring.controller;
 
 import com.chenls1997.spring.Constants;
+import com.chenls1997.spring.annotation.Login;
 import com.chenls1997.spring.model.User;
 import com.chenls1997.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,6 +102,7 @@ public class UserController extends BaseController {
         return "user/login";
     }
 
+    @Login
     @RequestMapping(value = "logout")
     public String logoutHandler(HttpServletRequest request, HttpServletResponse response, SessionStatus ss) {
         ss.setComplete();
@@ -142,19 +144,31 @@ public class UserController extends BaseController {
         return null;
     }
 
+    @Login
     @RequestMapping(value = "user")
     public String userpanelHandler(Model model, HttpServletRequest request, HttpServletResponse response) {
-        model.addAttribute("user", userService.findByID(
-                (Integer) request.getSession().getAttribute(Constants.userId)
-        ));
+        model.addAttribute("user", this.getCurrentUser());
         return "user/user";
     }
 
+    @Login
     @RequestMapping(value = "usersave")
     public String userPostHandler(Model model,HttpServletRequest request,HttpServletResponse response,
-                                  @RequestParam User entity){
-        System.out.println(entity.toString());
-        userService.save(entity);
-        return ajaxReturn(response,null);
+                                  @RequestParam String username,
+                                  @RequestParam String email,
+                                  @RequestParam String phone,
+                                  @RequestParam String question,
+                                  @RequestParam String result,
+                                  @RequestParam String address){
+        User entity = this.getCurrentUser();
+        entity.setUsername(username);
+        entity.setEmail(email);
+        entity.setPhone(phone);
+        entity.setQuestion(question);
+        entity.setResult(result);
+        entity.setAddress(address);
+        Integer ret = userService.update(entity);
+
+        return ajaxReturn(response,null,ret.toString(),ret);
     }
 }

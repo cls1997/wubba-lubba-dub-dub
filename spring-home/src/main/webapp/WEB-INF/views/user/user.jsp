@@ -29,16 +29,16 @@
 <div class="usertitle">完善个人资料</div>
 <div class="userdetail">
     <div class="leftarea">
-        <div class="udform"><span>用户名</span><input type="text" value="${user.username}"></div>
-        <div class="udform"><span>手机号</span><input type="text" value="${user.phone}"></div>
-        <div class="udform"><span>邮箱</span><input type="text" value="${user.email}"></div>
+        <div class="udform"><span>用户名</span><input id="username" type="text" value="${user.username}"></div>
+        <div class="udform"><span>手机号</span><input id="phone" type="text" value="${user.phone}"></div>
+        <div class="udform"><span>邮箱</span><input id="email" type="text" value="${user.email}"></div>
     </div>
     <div class="rightarea">
-        <div class="udform"><span>安全问题</span><input type="text" value="${user.question}"></div>
-        <div class="udform"><span>问题答案</span><input type="text" value="${user.result}"></div>
-        <div class="udform"><span>地址</span><input type="text" value="${user.address}"></div>
+        <div class="udform"><span>安全问题</span><input id="question" type="text" value="${user.question}"></div>
+        <div class="udform"><span>问题答案</span><input id="result" type="text" value="${user.result}"></div>
+        <div class="udform"><span>地址</span><input id="address" type="text" value="${user.address}"></div>
     </div>
-    <div class="userbutton"><input type="button" value="确认" onclick="submit()"> </div>
+    <div class="userbutton"><input type="button" value="确认" onclick="submit();"> </div>
 </div>
 <img src="${__static__}/images/userfooter.png">
 
@@ -46,7 +46,18 @@
 
 <script>
     function submit() {
-        $.post();
+        var data = {
+            username: $("#username").val(),
+            phone: $("#phone").val(),
+            email: $("#email").val(),
+            question: $("#question").val(),
+            result: $("#result").val(),
+            address: $("#address").val()
+        }
+        $.post(urls.usersave,data,function (r) {
+            //todo 1成功 0失败。
+            alert(r.status);
+        });
     }
 </script>
 </body>
