@@ -19,18 +19,18 @@
 
 <div class="center"><img src="${__static__}/images/found.png"></div>
 <div class="foundform">
-    <form>
+    <form >
         <div class="found-mb">请输入您的用户名：</div>
-        <div class="found-mb"><input type="text"></div>
+        <div class="found-mb"><input type="text" id="username"></div>
         <div class="found-mb">请输入您的安全问题：</div>
-        <div class="found-mb"><input type="text"></div>
+        <div class="found-mb"><input type="text" id="question"></div>
         <div class="found-mb">请输入您的安全问题答案：</div>
-        <div class="found-mb"><input type="text"></div>
+        <div class="found-mb"><input type="text" id="result"></div>
         <div class="found-mb">请输入您的新密码：</div>
-        <div class="found-mb"><input type="password"></div>
+        <div class="found-mb"><input type="password" id="pwd"></div>
         <div class="found-mb">请确认您的新密码：</div>
-        <div class="found-mb"><input type="password"></div>
-        <div class="found-mb"><input type="submit" value="找回密码" id="foundbtn"></div>
+        <div class="found-mb"><input type="password" id="cfmpwd"></div>
+        <div class="found-mb"><input type="submit" value="找回密码" id="foundbtn" onclick="submit();"></div>
     </form>
 </div>
 
@@ -38,6 +38,22 @@
 </div>
 
 <%@include file="../include/footer.jsp"%>
-
+<script>
+    function submit() {
+        var pwd = $("#pwd").val();
+        var cfmpwd = $("#cfmpwd").val();
+        //todo 检验
+        var data = {
+            username: $("#username").val(),
+            question: $("#question").val(),
+            result: $("#result").val(),
+            newpass: pwd,
+        }
+        $.post(urls.forgot,data,function (r) {
+            //todo 1 成功 0失败 -1填写错误
+            alert(r);
+        })
+    }
+</script>
 </body>
 </html>

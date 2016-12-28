@@ -11,6 +11,6 @@
 <script type="text/javascript" src="${__static__}/js/jquery.js"></script>
 
 <script type="text/javascript" src="${__static__}/js/master.js?v=2"></script>
-<script type="text/javascript" src="${__static__}/js/urls.js?v=2"></script>
+<script type="text/javascript" src="${__static__}/js/urls.js?v=3"></script>
 <script type="text/javascript" src="${__static__}/js/utils.js?v=2"></script>
 

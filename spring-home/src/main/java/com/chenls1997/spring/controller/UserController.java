@@ -124,24 +124,25 @@ public class UserController extends BaseController {
         }
     }*/
 
-    @RequestMapping("forgot")
+    @RequestMapping(value = "forgot",method = RequestMethod.GET)
     public String forgotHandler(Model model, HttpServletRequest request, HttpServletResponse response) {
-        if (request.getMethod().equals("POST")) {
-            String username = (String) request.getAttribute("username");
-            String question = (String) request.getAttribute("question");
-            String result = (String) request.getAttribute("result");
-
-            return ajaxReturn(response,
-                    userService.forgetPassword(username, question, result)
-            );
-        } else {
-            return "user/found";
-        }
+        return "user/found";
     }
 
-    public String forgot2Handler(Model model) {
-        // TODO: 16/12/18 ???
-        return null;
+    @RequestMapping(value = "forgotsave",method = RequestMethod.POST)
+    public String forgot2Handler(Model model, HttpServletRequest request,HttpServletResponse response,
+                                 @RequestParam String username,
+                                 @RequestParam String question,
+                                 @RequestParam String result,
+                                 @RequestParam String newpass) {
+        if (userService.forgetPassword(username,question,result)){
+            User u = userService.findByID(userService.getIdByUsername(username));
+            u.setPassword(newpass);
+            Integer ret = userService.update(u);
+            return ajaxReturn(response,null, ret.toString(),ret);
+        } else {
+            return ajaxReturn(response, null, "-1", -1);
+        }
     }
 
     @Login

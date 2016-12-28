@@ -85,12 +85,11 @@ public class UserService {
     public boolean forgetPassword(String username, String question, String result){
         User u = this.findByID(
                 this.getIdByUsername(username)
-                );
+        );
 
         if (question.equals(u.getQuestion()) && result.equals(u.getResult())){
             return true;
         }
-
         return false;
     }
 
