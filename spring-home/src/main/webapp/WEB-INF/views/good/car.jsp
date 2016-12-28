@@ -48,7 +48,7 @@
     </c:forEach>
     <div class="carfooter">
         <div class="leftarea">购物车可以暂存您的商品，并且显示商品的最新价格。</div>
-        <div class="rightarea" id="carshopbtn" onclick="checkout()">结算</div>
+        <div class="rightarea" id="carshopbtn" onclick="checkout();">结算</div>
         <div class="rightarea" id="cartotalprice">
             小计（${count}件商品）：<span><fmt:formatNumber type="currency">${price}</fmt:formatNumber></span>
         </div>
@@ -61,11 +61,8 @@
 
 <script>
     function checkout() {
-        $.post(urls.carCheckout,function (r) {
-
-        });
+        $(location).attr('href',urls.checkout);
     }
-
     function deleteCar(a) {
         alert(urls.carDelete);
         $.post(urls.carDelete,{ id: a });

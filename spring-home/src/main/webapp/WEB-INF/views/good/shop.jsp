@@ -21,19 +21,6 @@
 <div class="shopbody">
     <div class="shopleft">
         <div class="sgtitle">商品信息</div>
-        <div class="sgbody">
-            <div class="sgimg"><img src=""></div>
-            <div class="sgmsg">
-                <ul>
-                    <li class="sgmsg1">喵喵喵</li>
-                    <li class="sgmsg2">
-                        test
-                    </li>
-                    <li class="sgmsg3">2件&nbsp;
-                        <span>共<fmt:formatNumber type="currency">123</fmt:formatNumber></span></li>
-                </ul>
-            </div>
-        </div>
         <c:forEach items="${checkouts}" var="item" varStatus="i">
             <div class="sgbody">
                 <div class="sgimg"><img src="${item.get("goodId")}"></div>
@@ -54,16 +41,24 @@
     </div>
     <div class="shopright">
         <div class="satitle">您的收货地址：</div>
-        <div class="sainput"><input type="text" value="浙江省杭州市临安青山湖街道胜联路168号" id="sads"></div>
-        <div class="saphone">联系电话：<input type="text" value="15555555555" id="sphone"></div>
-        <div class="satotalprice">合计：<span>￥360.00</span></div>
-        <div class="sashopbtn">购买</div>
+        <div class="sainput"><input type="text" value="${user.address}" id="sads"></div>
+        <div class="saphone">联系电话：<input type="text" value="${user.phone}" id="sphone"></div>
+        <div class="satotalprice">合计：<span><fmt:formatNumber type="currency">${price}</fmt:formatNumber> </span></div>
+        <div class="sashopbtn" onclick="submit()">购买</div>
     </div>
 </div>
 
 <div class="login" id="logbody">
 </div>
-
-
+<script>
+    function submit() {
+        urls.carCheckout
+        /*
+         * TODO 自己写 info是成功的数量
+         * Time: 16/12/29 7:20
+         * Creator: Chenls
+         */ 
+    }
+</script>
 </body>
 </html>

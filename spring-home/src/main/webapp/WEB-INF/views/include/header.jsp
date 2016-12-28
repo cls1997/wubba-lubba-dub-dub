@@ -50,13 +50,16 @@
 </div>
 <div class="search">
     <div class="logo"><img src="${__static__}/images/logo.gif"/></div>
-    <div class="searchtext">
-        <span>搜本店</span>
-        <form method="get">
-            <input type="text">
-            <input type="submit" value="">
-        </form>
-    </div>
+
+    <!--
+        <div class="searchtext">
+            <span>搜本店</span>
+            <form method="get">
+                <input type="text">
+                <input type="submit" value="">
+            </form>
+        </div>
+
+    -->
+
 </div>
-
-

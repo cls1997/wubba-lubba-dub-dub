@@ -135,10 +135,25 @@ public class CartController extends BaseController {
     @Login
     public String checkoutHandler(Model model,HttpServletRequest request,HttpServletResponse response){
         List<Row> checkouts = cartService.findByUserid(this.getCurrentUserId());
+        Double price = 0d;
+
+        for (Row r:checkouts)
+            price+= r.getDouble("orderPrice") * r.getInt("orderCount");
 
         model.addAttribute("checkouts",checkouts);
-
+        model.addAttribute("user",this.getCurrentUser());
+        model.addAttribute("price",price);
         return "good/shop";
+    }
+
+
+    @RequestMapping(value = "buynow")
+    @Login
+    public String buynowHandler(Model model,HttpServletRequest request,HttpServletResponse response,
+                                @RequestParam Integer goodId,
+                                @RequestParam Integer orderCount){
+
+        return ajaxReturn(response,null);
     }
 
 

@@ -116,7 +116,12 @@
 <%@include file="../include/footer.jsp"%>
 <script>
     function buynow(id) {
-
+        urls.buynow
+        /*
+         * TODO 1成功 0失败
+         * Time: 16/12/29 7:43
+         * Creator: Chenls
+         */
     }
 
     function tocar(id) {

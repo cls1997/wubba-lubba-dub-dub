@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.bind.annotation.XmlList;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,19 +52,19 @@ public class SubController extends BaseController {
         List<Row> outdatedSubs = subService.getOutdatedSubsByUserid(this.getCurrentUserId());
         for (Row r : subs){
             r.put("goodname", goodService.findByID(
-                    r.getInt("good_id")
+                    r.getInt("goodId")
             ).getGoodName());
             r.put("goodimage", UploadUtils.parseFileUrl(goodService.findByID(
-                    r.getInt("good_id")
+                    r.getInt("goodId")
             ).getGoodImage()));
         }
 
         for (Row r : outdatedSubs){
             r.put("goodname", goodService.findByID(
-                    r.getInt("good_id")
+                    r.getInt("goodId")
             ).getGoodName());
             r.put("goodimage", UploadUtils.parseFileUrl(goodService.findByID(
-                    r.getInt("good_id")
+                    r.getInt("goodId")
             ).getGoodImage()));
         }
 
@@ -69,18 +72,53 @@ public class SubController extends BaseController {
         model.addAttribute("outdatedSubs",outdatedSubs);
         return "good/sub";
     }
-
+    @Login
     @RequestMapping(value = "buynow")
-    public String buynowHandler(Model model,HttpServletRequest request,HttpServletResponse response,
-                                @RequestParam Integer goodId,
-                                @RequestParam Integer orderCount){
+    public String checkoutHandler(Model model,HttpServletRequest request,HttpServletResponse response,
+                                  @RequestParam Integer goodId,
+                                  @RequestParam Integer orderCount){
+        Sub s = new Sub();
+        s.setUserId(this.getCurrentUserId());
+        s.setGoodId(goodId);
+        s.setOrderedTime(new Timestamp(new Date().getTime()));
+        s.setReceiveAddress(this.getCurrentUser().getAddress());
+        s.setPrice(goodService.findByID(goodId).getGoodPrice()*orderCount);
+        s.setState(1);
 
-        return ajaxReturn(response,null);
+        return ajaxReturn(response,null,"",subService.save(s));
+
     }
 
+    @Login
     @RequestMapping(value = "checkout")
-    public String checkoutHandler(Model model,HttpServletRequest request,HttpServletResponse response){
-        return null;
+    public String checkoutHandler(Model model,HttpServletRequest request,HttpServletResponse response,
+                                @RequestParam Integer goodId,
+                                @RequestParam Integer orderCount,
+                                @RequestParam String saddress){
+        List<Row> cart = cartService.findByUserid(this.getCurrentUserId());
+        Sub s = null;
+        Integer ret = 0;
+        for (Row r:cart){
+            s = new Sub();
+            s.setUserId(this.getCurrentUserId());
+            s.setGoodId(r.getInt("goodId"));
+            s.setOrderedTime(new Timestamp(new Date().getTime()));
+            s.setReceiveAddress(saddress);
+            s.setPrice(r.getDouble("orderPrice")*r.getInt("orderCount"));
+            s.setState(1);
+            ret+= subService.save(s);
+        }
+        return ajaxReturn(response,null,ret.toString(),ret>=1?1:0);
+    }
+
+    @Login
+    @RequestMapping("confirm")
+    public String checkoutHandler(Model model,HttpServletRequest request,HttpServletResponse response,
+                                  @RequestParam Integer id){
+        Sub s = subService.findByID(id);
+        s.setState(0);
+        Integer ret = subService.update(s);
+        return ajaxReturn(response,null,ret.toString(),ret);
     }
 
 }

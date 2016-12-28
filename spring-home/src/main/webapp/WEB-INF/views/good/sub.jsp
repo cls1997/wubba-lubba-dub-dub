@@ -31,7 +31,7 @@
                 <li><div class="subnum">订单编号：<span>${sub.get("id")}</span></div></li>
                 <li><div class="ordertime">下单时间：<span>${sub.get("orderedtime")}</span></div></li>
                 <!-- todo ??? 加个按键-->
-                <li><div class="subconfirm" id="confirmsub" onclick="confirm(${sub.get("id")})">确认收货</div></li>
+                <li><div class="subconfirm" id="confirmsub" onclick="confirm(${sub.get("id")});">确认收货</div></li>
             </ul>
         </div>
         </c:forEach>
@@ -42,20 +42,16 @@
     </div>
     <div class="subhis">
         <c:forEach items="${outdatedSubs}" var="sub">
-        <div class="subnowbody">
-            <div class="subimg"><img src="images/goodtest.png"></div>
-            <ul>
-                <li><div class="subtitle">三只松鼠 夏威夷果200g</div></li>
-                <li><div class="subnum">订单编号：<span>11111111111</span></div></li>
-                <li><div class="ordertime">
-                    <!--todo 表里没有 删了？？-->
-                    <!--完成时间：<span>1111年11月1日</span>-->
-                    &nbsp;
-                </div></li>
-                <!-- todo ??? 加个按键 讲道理这个可以删了-->
-                <li><div class="subconfirm" id="confirmsub" onclick="confirm(${sub.get("id")})"></div></li>
-            </ul>
-        </div>
+            <div class="subnowbody">
+                <div class="subimg"><img src="${sub.get('goodimage')}"></div>
+                <ul>
+                    <li><div class="subtitle">${sub.get("goodname")}</div></li>
+                    <li><div class="subnum">订单编号：<span>${sub.get("id")}</span></div></li>
+                    <li><div class="ordertime">下单时间：<span>${sub.get("orderedtime")}</span></div></li>
+                    <!-- todo ??? 加个按键-->
+                    <li><div class="subconfirm" id="onemore" onclick="onemore(${sub.get("id")});">再来一单</div></li>
+                </ul>
+            </div>
         </c:forEach>
         <div class="subnowbody">
             <li><div class="subtitle">没有订单</div></li>
@@ -68,7 +64,18 @@
 
 <script>
     function confirm(id) {
+        alert(id);
+        urls.confirmGet
+        /*
+         * TODO info/status 1成功 0失败
+         * Time: 16/12/29 7:16
+         * Creator: Chenls
+         */ 
+    }
 
+    function onemore(id) {
+        alert(id)
+        url.oneMore
     }
 </script>
 </body>
