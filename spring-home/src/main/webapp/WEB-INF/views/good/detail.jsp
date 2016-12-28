@@ -15,7 +15,7 @@
 </head>
 <body>
 <%@include file="../include/header.jsp"%>
-<div class="center"><img src="images/hr1.png"></div>
+<div class="center"><img src="${__static__}/images/hr1.png"></div>
 <div class="details">
     <div class="gsell">
         <div class="dgimg"><img src="${pic_url}"></div>
@@ -47,19 +47,19 @@
         <div>本店商品</div>
         <ul>
             <li>
-                <img src="images/goodtest.png">
+                <img src="${__static__}/images/goodtest.png">
             </li>
             <li>
-                <img src="images/goodtest.png">
+                <img src="${__static__}/images/goodtest.png">
             </li>
             <li>
-                <img src="images/goodtest.png">
+                <img src="${__static__}/images/goodtest.png">
             </li>
             <li>
-                <img src="images/goodtest.png">
+                <img src="${__static__}/images/goodtest.png">
             </li>
             <li>
-                <img src="images/goodtest.png">
+                <img src="${__static__}/images/goodtest.png">
             </li>
         </ul>
         <span>更多>>></span>
@@ -81,30 +81,30 @@
         </ul>
     </div>
 </div>
-<div class="center"><img src="images/hr2.png"></div>
+<div class="center"><img src="${__static__}/images/hr2.png"></div>
 <div class="dcookie">
     <ul>
         <li>
             <div class="cookiectn">
-                <div class="cookieimg"><img src="images/goodtest.png"></div>
+                <div class="cookieimg"><img src="${__static__}/images/goodtest.png"></div>
                 <div class="cookietext">夏威夷果200g</div>
             </div>
         </li>
         <li>
             <div class="cookiectn">
-                <div class="cookieimg"><img src="images/goodtest.png"></div>
+                <div class="cookieimg"><img src="${__static__}/images/goodtest.png"></div>
                 <div class="cookietext">夏威夷果200g</div>
             </div>
         </li>
         <li>
             <div class="cookiectn">
-                <div class="cookieimg"><img src="images/goodtest.png"></div>
+                <div class="cookieimg"><img src="${__static__}/images/goodtest.png"></div>
                 <div class="cookietext">夏威夷果200g</div>
             </div>
         </li>
         <li>
             <div class="cookiectn">
-                <div class="cookieimg"><img src="images/goodtest.png"></div>
+                <div class="cookieimg"><img src="${__static__}/images/goodtest.png"></div>
                 <div class="cookietext">夏威夷果200g</div>
             </div>
         </li>
@@ -120,12 +120,12 @@
     }
 
     function tocar(id) {
-        var orderCount = $("#jian").val()
+        var orderCount = $("#jian").val();
         //todo check orderCount 写页面里
         var data ={
             "goodId" :id,
             "orderCount": orderCount
-        }
+        };
         $.post(urls.tocar,data,function (r) {
             //todo 弹框 r.info 是返回的信息，r.status == 1 是成功 0 是失败
         },"json");

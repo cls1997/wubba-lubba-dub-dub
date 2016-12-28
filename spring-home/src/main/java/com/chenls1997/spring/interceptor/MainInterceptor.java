@@ -11,11 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * MainInterceptor
  * Created by Chenls on 16/12/26.
  */
 public class MainInterceptor implements HandlerInterceptor {
+    private final HttpSession httpSession;
+
     @Autowired
-    private HttpSession httpSession;
+    public MainInterceptor(HttpSession httpSession) {
+        this.httpSession = httpSession;
+    }
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //Get current user from session

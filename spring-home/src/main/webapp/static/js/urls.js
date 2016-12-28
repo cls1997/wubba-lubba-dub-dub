@@ -1,7 +1,3 @@
-/**
- * Created by Chenls on 16/12/27.
- */
-
 var urls ={
     login : "/user/login",
     register : "/user/register",
@@ -10,4 +6,4 @@ var urls ={
     carDelete: "/cart/delete",
     buynow: "",
     carCheckout: ""
-}
+};

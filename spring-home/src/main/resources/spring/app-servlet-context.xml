@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
 	<!-- 启用SpringMVC的注解功能,它会自动注册HandlerMapping、HandlerAdapter、ExceptionResolver的相关实例 -->
@@ -42,9 +41,9 @@
 
 	<!-- 支持文件上传 -->
 	<bean id="multipartResolver" class="com.zlzkj.core.base.MyMultipartResolver">
-		<property name="defaultEncoding" value="utf-8"></property>	
+		<property name="defaultEncoding" value="utf-8"/>
 <!-- 		设置上传文件的最大尺寸 -->
-		<property name="maxUploadSize" value="1024000000"></property>
+		<property name="maxUploadSize" value="1024000000"/>
 		<property name="excludeUrl">  
             <list>  
 <!--               如果请求中包含以下路径，则不进行拦截   -->

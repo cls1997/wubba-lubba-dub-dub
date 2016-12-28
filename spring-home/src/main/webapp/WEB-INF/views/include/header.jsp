@@ -6,9 +6,11 @@
 <div class="header">
     <div class="top">
         <ul>
-            <a href="#" target="_blank">
-                <li>我要卖</li>
-            </a>
+            <li>
+                <a href="#" target="_blank">
+                    我要卖
+                </a>
+            </li>
             <% if (!request.getAttribute("username").equals(Constants.nullUsername)) {%>
                     <div class="toplog">
                         <li>欢迎你！${requestScope.get("username")}</li>
