@@ -11,7 +11,7 @@
 <head>
     <meta http-equiv="content-Type" content="text/html;charset=UTF-8">
     <title>Delicacy in Leside</title>
-    <%@include file="../public/resource.jsp"%>
+    <%@include file="../index/resource.jsp"%>
 </head>
 <body>
 

@@ -383,6 +383,8 @@
 }
 
 .footer{
+	position:fixed;
+	bottom:0;
 	height: 64px;
 	width: 1920px;
 	background-color: black;

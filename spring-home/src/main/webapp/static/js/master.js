@@ -63,15 +63,19 @@ $(function(){
                         data: data,
                         success: function (r) {
                             alert("func");
+                            if(r.status== 1 ){
                             $("#logbody").load("/static/html/info.html",
                                 function () {
-                                    alert("fun");
+                                    alert("ok");
                                     $("#content").val(r.info);
 
                                     $("#okbtn").click(function () {
                                     })
                                 }
-                            )
+                            )}
+                            else {
+                                alert("no");
+                            }
                         },
                         type: "POST",
                         dataType: "json"
@@ -107,6 +111,8 @@ $(function(){
                         url : urls.register,
                         data: data,
                         success: function (r) {
+                            if(r.status==1){
+                                alert("注册成功");
                             $("#logbody").load("/static/html/info.html",
                                 function () {
                                     $("#content").val(r.info);
@@ -114,7 +120,14 @@ $(function(){
                                         window.location.reload();
                                     })
                                 }
-                            )
+                            )}
+                            else {
+                                alert("用户名已存在")
+                            }
+
+                        },
+                        error: function (r) {
+                            alert("?????");
                         },
                         type: "POST",
                         dataType: "json"
@@ -129,8 +142,12 @@ $(function(){
 
 //todo delete this function
 function alert_and_false(u,p,c) {
-    alert("alert");
-    return false;
+    if(p!=c) {
+        alert("2个密码不一样");
+        return false;
+    }
+    else
+        return true;
 }
 
 function ajaxError(e) {
@@ -139,6 +156,7 @@ function ajaxError(e) {
 
 function login_check(username,password) {
     //TODO 数据验证
+
 }
 
 function register_check(username,password,confirmpassword) {
