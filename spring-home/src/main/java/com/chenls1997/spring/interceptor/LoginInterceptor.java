@@ -19,28 +19,24 @@ import javax.servlet.http.HttpSession;
 public class LoginInterceptor implements HandlerInterceptor {
     private final HttpSession httpSession;
 
-    public String[] allowUrls;
-
     @Autowired
     public LoginInterceptor(HttpSession httpSession) {
         this.httpSession = httpSession;
     }
 
-    public void setAllowUrls(String[] allowUrls) {
-        this.allowUrls = allowUrls;
-    }
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HandlerMethod h = (HandlerMethod) handler;
         Login login = h.getMethodAnnotation(Login.class);
-        /*
-         * TODO 完成针对 @Login 的处理
-         * Time: 16/12/29 1:00
-         * Creator: Chenls
-         */ 
+
         if (login == null) {
             return true;
         }
-
+        User cu = (User) httpSession.getAttribute(Constants.user);
+        System.out.println("LoginInterceptor:35 "+cu);
+        if (cu==null){
+            request.getRequestDispatcher("/user/login").forward(request, response);
+            return false;
+        }
         return true;
     }
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {

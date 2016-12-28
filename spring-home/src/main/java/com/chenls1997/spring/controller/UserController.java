@@ -6,10 +6,7 @@ import com.chenls1997.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +47,7 @@ public class UserController extends BaseController {
                                   @RequestParam String password,
                                   @RequestParam("confirmpassword")
                                           String confirm) {
-        if (username == null || password == null || confirm == null || !password.equals(confirm))
+        if (username == null || password == null || confirm == null || !password.equals(confirm)||!userService.check(username))
             return ajaxReturn(response, null, "注册失败", 0);
 
         entity.setPassword(password);
@@ -78,7 +75,7 @@ public class UserController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "login")
+    @RequestMapping(value = "login",method = RequestMethod.POST)
     public String loginHandler(Model model, HttpServletRequest request, HttpServletResponse response,
                                @RequestParam String username,
                                @RequestParam String password) {
@@ -94,6 +91,11 @@ public class UserController extends BaseController {
             model.addAttribute(Constants.user, entity);
             return ajaxReturn(response, entity, "登陆成功", 1);
         }
+    }
+
+    @RequestMapping(value = "login",method = RequestMethod.GET)
+    public String lo(HttpServletRequest request,HttpServletResponse response){
+        return "user/login";
     }
 
     @RequestMapping(value = "logout")
@@ -145,7 +147,7 @@ public class UserController extends BaseController {
         return "user/user";
     }
 
-    @RequestMapping(value = "userp")
+    @RequestMapping(value = "usersave")
     public String userPostHandler(Model model,HttpServletRequest request,HttpServletResponse response,
                                   @RequestParam User entity){
         System.out.println(entity.toString());

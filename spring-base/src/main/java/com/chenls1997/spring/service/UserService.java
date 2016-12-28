@@ -107,4 +107,18 @@ public class UserService {
         return UIUtils.getGridData(count, list);
     }
 
+    public boolean check(String username){
+        String where = "username="+username;
+        SQLBuilder sqlBuilder = SQLBuilder.getSQLBuilder(User.class);
+        String sql = sqlBuilder.fields("id").where(where).selectSql();
+
+        List<Row> result = sqlRunner.select(sql);
+
+        if (result.size()>0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

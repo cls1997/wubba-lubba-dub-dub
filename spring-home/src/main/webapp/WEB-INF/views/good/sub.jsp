@@ -16,7 +16,6 @@
 <body>
 
 <%@include file="../include/header.jsp"%>
-<!--todo 布局有问题-->
 
 <div class="subtitleline">
     <div class="titleleft">当前订单</div>
@@ -66,8 +65,6 @@
 
 <div class="login" id="logbody">
 </div>
-
-<%@include file="../include/footer.jsp"%>
 
 <script>
     function confirm(id) {

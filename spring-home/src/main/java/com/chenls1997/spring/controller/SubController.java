@@ -1,6 +1,7 @@
 package com.chenls1997.spring.controller;
 
 import com.chenls1997.spring.Constants;
+import com.chenls1997.spring.annotation.Login;
 import com.chenls1997.spring.model.Sub;
 import com.chenls1997.spring.model.User;
 import com.chenls1997.spring.service.CartService;
@@ -41,10 +42,10 @@ public class SubController extends BaseController {
     }
 
     @RequestMapping(value = "list")
+    @Login
     public String subViewHandler(Model model, HttpServletRequest request, HttpServletResponse response){
-        Integer userId = (Integer) request.getSession().getAttribute(Constants.userId);
-        List<Row> subs = subService.getSubsByUserid (userId);
-        List<Row> outdatedSubs = subService.getOutdatedSubsByUserid(userId);
+        List<Row> subs = subService.getSubsByUserid (this.getCurrentUserId());
+        List<Row> outdatedSubs = subService.getOutdatedSubsByUserid(this.getCurrentUserId());
         for (Row r : subs){
             r.put("goodname", goodService.findByID(
                     r.getInt("good_id")
