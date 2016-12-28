@@ -42,7 +42,7 @@ public class SubController extends BaseController {
         this.goodService = goodService;
     }
 
-    @Login(LoginType.page)
+    @Login
     @RequestMapping(value = "list")
     public String subViewHandler(Model model, HttpServletRequest request, HttpServletResponse response){
         List<Row> subs = subService.getSubsByUserid (this.getCurrentUserId());

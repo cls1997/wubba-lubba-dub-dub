@@ -1,5 +1,6 @@
 package com.chenls1997.spring.controller;
 
+import com.chenls1997.spring.annotation.Login;
 import com.chenls1997.spring.model.Good;
 import com.chenls1997.spring.service.CommentService;
 import com.chenls1997.spring.service.GoodService;
@@ -10,9 +11,8 @@ import com.zlzkj.core.sql.Row;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +26,6 @@ import java.util.Map;
  */
 
 @Controller
-@SessionAttributes("userId")
 @RequestMapping(value = "good")
 public class GoodController extends BaseController {
     private final GoodService goodService;
@@ -63,5 +62,55 @@ public class GoodController extends BaseController {
     public String CommentGetHandler(Integer id, HttpServletRequest request, HttpServletResponse response) {
         List<Row> commentList = commentService.getCommentListByGoodId(id);
         return ajaxReturn(response, commentList);
+    }
+
+    @Login
+    @RequestMapping("sell")
+    public String sellHandler(Model model,HttpServletRequest request,HttpServletResponse response){
+        return "good/sell";
+    }
+
+    @Login
+    @RequestMapping(value = "sellsave",method = RequestMethod.POST)
+    public String sellSaveHandler(Model model, HttpServletRequest request, HttpServletResponse response,
+                                  @RequestParam("file_data") MultipartFile file_data,
+                                  @RequestParam String goodName,
+                                  @RequestParam Double goodPrice,
+                                  @RequestParam Long goodStock,
+                                  @RequestParam String goodIntro,
+                                  @RequestParam String typeName){
+        String picWeb = "";
+        if (!file_data.isEmpty()){
+            Map<String,Object> pic = UploadUtils.saveMultipartFile(file_data);
+            if((Integer)pic.get("status")>0){
+                picWeb = pic.get("saveName").toString();
+            } else { //上传出错
+                return ajaxReturn(response,null,pic.get("errorMsg").toString(),-1);
+            }
+        }
+        Good entity = new Good();
+
+        entity.setGoodName(goodName);
+        entity.setGoodPrice(goodPrice);
+        entity.setGoodStock(goodStock);
+        entity.setGoodIntro(goodIntro);
+        entity.setGoodImage(picWeb);
+        entity.setGoodSold(0l);
+        entity.setDiscount(0d);
+        entity.setProviderId(this.getCurrentUserId());
+
+        if (typeService.has(typeName))
+            entity.setGoodTypeId(typeService.getIdByName(typeName));
+        else
+            entity.setGoodTypeId(typeService.newAndReturnId(typeName));
+
+        int flag = goodService.save(entity);
+        if (flag == 1) {
+            return ajaxReturn(response, null, "添加成功", 1);
+        } else {
+            return ajaxReturn(response, null, "添加失败", 0);
+        }
+
+
     }
 }

@@ -60,17 +60,10 @@
         <div class="sashopbtn">购买</div>
     </div>
 </div>
-<%@include file="../include/footer.jsp"%>
+
 <div class="login" id="logbody">
 </div>
 
-<!--
-/*
- * TODO 布局有问题
- * Time: 16/12/29 3:37
- * Creator: Chenls
- */ 
--->
 
 </body>
 </html>

@@ -7,7 +7,7 @@
     <div class="top">
         <ul>
             <li>
-                <a href="#" target="_blank">
+                <a href="${z:u('good/sell')}" target="_blank">
                     我要卖
                 </a>
             </li>

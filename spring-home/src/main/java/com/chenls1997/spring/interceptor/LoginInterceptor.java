@@ -30,14 +30,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
         HandlerMethod h = (HandlerMethod) handler;
         Login login = h.getMethodAnnotation(Login.class);
 
-        System.out.println("LoginInterceptor:anno "+login);
         if (login == null) {
             return true;
         }
 
         User cu = (User) httpSession.getAttribute(Constants.user);
-
-        System.out.println("LoginInterceptor "+cu);
 
         if (cu==null){
             if (LoginType.page == login.value()) {

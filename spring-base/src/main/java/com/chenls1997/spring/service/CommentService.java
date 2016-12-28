@@ -74,6 +74,7 @@ public class CommentService {
         String where = "good_id="+gid;
         String sql = sqlBuilder
                 .fields("count(*)")
+                .where(where)
                 .selectSql();
         return sqlRunner.count(sql);
 

@@ -60,4 +60,35 @@ public class TypeService {
         Integer count = sqlRunner.count(countSql);
         return UIUtils.getGridData(count, list);
     }
+
+    public boolean has(String name){
+        SQLBuilder sqlBuilder = SQLBuilder.getSQLBuilder(Type.class);
+        String where = "name=\'"+name+"\'";
+        String countSql = sqlBuilder.fields("count(*)").where(where).selectSql();
+        Integer count = sqlRunner.count(countSql);
+        if (count==0){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public Integer getIdByName(String name){
+        SQLBuilder sqlBuilder = SQLBuilder.getSQLBuilder(Type.class);
+        String where = "name=\'"+name+"\'";
+        String sql = sqlBuilder.fields("id").where(where).selectSql();
+        List<Row> list = sqlRunner.select(sql);
+        if (list.size()==0){
+            return null;
+        } else {
+            return (Integer) list.get(0).get("id");
+        }
+    }
+
+    public Integer newAndReturnId(String name){
+        Type t = new Type();
+        t.setName(name);
+        this.save(t);
+        return this.getIdByName(name);
+    }
 }
