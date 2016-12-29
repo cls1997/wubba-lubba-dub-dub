@@ -159,7 +159,12 @@
                 data: data,
                 dataType:"json",
                 success: function(r){
-                    $(location).attr('href',"/cart/list");
+                    var c = confirm("成功添加到购物车！是否去购物车结算？")
+                    if(c==true)
+                        $(location).attr('href',"/cart/list");
+                    else {
+                        window.location.reload();
+                    }
                 },
                 error: function(r){
                     alert( "Error: " + r.info);

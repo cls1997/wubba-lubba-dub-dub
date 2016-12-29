@@ -82,14 +82,8 @@ public class UserController extends BaseController {
     public String loginHandler(Model model, HttpServletRequest request, HttpServletResponse response,
                                @RequestParam String username,
                                @RequestParam String password) {
-
-        System.out.println(username);
-        System.out.println(password);
         User entity = userService.LoginGetObj(username, password);
-
-
         if (entity == null) {
-            System.out.println("aaaaa");
             return ajaxReturn(response, null, "登陆失败", 0);
 
         } else {

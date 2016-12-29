@@ -57,6 +57,7 @@
             "saddress": $("#sads").val(),
         };
         $.post(urls.carCheckout,data,function (r) {
+            alert("购买成功")
             $(location).attr('href',"/sub/list");
             }
         );
