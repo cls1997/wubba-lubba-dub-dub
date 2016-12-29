@@ -48,8 +48,7 @@ public class UserController extends BaseController {
                                   @RequestParam String xpassword,
                                   @RequestParam("xconfirmpassword") String confirm) {
 
-        System.out.println("boolean+"+ (xusername == null) +" "+ (xpassword == null) +" "+ (confirm == null) +
-                " "+ (!xpassword.equals(confirm)) +" "+ (!userService.check(xusername)));
+        //System.out.println("boolean+"+ (xusername == null) +" "+ (xpassword == null) +" "+ (confirm == null) + " "+ (!xpassword.equals(confirm)) +" "+ (!userService.check(xusername)));
         if (xusername == null || xpassword == null || confirm == null || !xpassword.equals(confirm)||userService.check(xusername))
             return ajaxReturn(response, null, "注册失败", 0);
 
