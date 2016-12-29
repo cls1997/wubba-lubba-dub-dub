@@ -61,26 +61,28 @@ $(function(){
                     var settings={
                         url : urls.login,
                         data: data,
+                        type: "POST",
+                        dataType: "json",
+                        async:false,
                         success: function (r) {
                             if(r.status== 1 ){
-                                alert("登录成功");
                             $("#logbody").load("/static/html/info.html",
                                 function () {
                                     $("#content").val(r.info);
-
                                     $("#okbtn").click(function () {
                                     })
                                 }
                             )}
                             else {
-                                alert("no");
+                                alert(r.status);
                             }
                         },
-                        error:function (r) {
-                            alert("???");
+                        error: function(XMLHttpRequest,textStatus, errorThrown) {
+                            alert(XMLHttpRequest.status);
+                            alert(XMLHttpRequest.readyState);
+                            alert(textStatus);
                         },
-                        type: "POST",
-                        dataType: "json"
+
                     }
 
                     $.ajax(settings);
@@ -112,6 +114,7 @@ $(function(){
                     var settings={
                         url : urls.register,
                         data: data,
+                        async:false,
                         success: function (r) {
                             if(r.status==1){
                                 alert("注册成功");

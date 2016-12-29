@@ -44,27 +44,20 @@
         <div class="sainput"><input type="text" value="${user.address}" id="sads"></div>
         <div class="saphone">联系电话：<input type="text" value="${user.phone}" id="sphone"></div>
         <div class="satotalprice">合计：<span><fmt:formatNumber type="currency">${price}</fmt:formatNumber> </span></div>
-        <div class="sashopbtn" id="sasubmit">购买</div>
+        <div class="sashopbtn" id="sasubmit" onclick="submit()">购买</div>
     </div>
 </div>
 
 <div class="login" id="logbody">
 </div>
 <script>
-    $(function () {
-        $("#sasubmit").click(submit());
-    })
+
     function submit() {
         var data={
             "saddress": $("#sads").val(),
         };
         $.post(urls.carCheckout,data,function (r) {
-                if(r.status==1){
-                    alert("购买成功，共"+r.info+"件商品")
-                }
-                else{
-                    alert("???");
-                }
+            $(location).attr('href',"/sub/list");
             }
         );
         /*

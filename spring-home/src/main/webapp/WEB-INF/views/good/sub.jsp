@@ -61,7 +61,16 @@
 
 <div class="login" id="logbody">
 </div>
+<div class="commentbody">
+    <div class="cm_head">评&nbsp;论</div>
+    <div class="cm_body">
+        <div class="cm_msg">确认收货成功！写点评论吧</div>
+        <form action="/comment/do" method="POST">
+            <div class="login-mb"><textarea id="commenttext" wrap="physical" name="content"></textarea>
+                <div class="login-mb"><input type="submit" id="commentbtn"></div>
 
+            </div></form>
+    </div>
 <script>
     function confirm(id) {
         alert(id);

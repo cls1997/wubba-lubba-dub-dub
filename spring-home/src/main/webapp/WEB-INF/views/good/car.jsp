@@ -64,8 +64,10 @@
         $(location).attr('href',urls.checkout);
     }
     function deleteCar(a) {
-        alert(urls.carDelete);
-        $.post(urls.carDelete,{ id: a });
+        $.post(urls.carDelete,{ id: a },function (r) {
+            window.location.reload();
+            window.location.reload();
+        });
     }
 </script>
 </body>

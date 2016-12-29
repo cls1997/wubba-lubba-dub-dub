@@ -82,18 +82,23 @@ public class UserController extends BaseController {
     public String loginHandler(Model model, HttpServletRequest request, HttpServletResponse response,
                                @RequestParam String username,
                                @RequestParam String password) {
+
         System.out.println(username);
         System.out.println(password);
         User entity = userService.LoginGetObj(username, password);
 
+
         if (entity == null) {
+            System.out.println("aaaaa");
             return ajaxReturn(response, null, "登陆失败", 0);
+
         } else {
             model.addAttribute(Constants.username, entity.getUsername());
             model.addAttribute(Constants.userId, entity.getId());
             model.addAttribute(Constants.user, entity);
             return ajaxReturn(response, entity, "登陆成功", 1);
         }
+
     }
 
     @RequestMapping(value = "login",method = RequestMethod.GET)
@@ -105,6 +110,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "logout")
     public String logoutHandler(HttpServletRequest request, HttpServletResponse response, SessionStatus ss) {
         ss.setComplete();
+        request.getSession().invalidate();
         return "index/index";
     }
 

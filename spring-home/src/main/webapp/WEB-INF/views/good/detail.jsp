@@ -116,10 +116,25 @@
 <%@include file="../include/footer.jsp"%>
 <script>
     function buynow(id) {
-        urls.buynow
+
         var data={
-            goodId=${good.id}
+            "goodId":id,
+            "orderCount":$("#he").val()
         }
+        $.ajax({
+            type: "POST",
+            url: urls.buynow,
+            data: data,
+            dataType:"json",
+            success: function(r){
+                if(r.state()==1)
+                alert( "ok" + r.info );
+                else alert("no"+r.info)
+            },
+            error: function(r){
+                alert( "error");
+            }
+        });
         /*
          * TODO 1成功 0失败
          * Time: 16/12/29 7:43
@@ -144,7 +159,7 @@
                 data: data,
                 dataType:"json",
                 success: function(r){
-                    alert( "Data Saved: " + r.info );
+                    $(location).attr('href',"/cart/list");
                 },
                 error: function(r){
                     alert( "Error: " + r.info);
