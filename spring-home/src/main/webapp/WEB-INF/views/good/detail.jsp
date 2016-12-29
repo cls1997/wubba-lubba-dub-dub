@@ -117,6 +117,9 @@
 <script>
     function buynow(id) {
         urls.buynow
+        var data={
+            goodId=${good.id}
+        }
         /*
          * TODO 1成功 0失败
          * Time: 16/12/29 7:43
@@ -125,15 +128,30 @@
     }
 
     function tocar(id) {
-        var orderCount = $("#jian").val();
+        var orderCount = $("#he").val();
+        if(orderCount>${good.goodStock}){
+            alert("货不够怎么办");
+        }
+        else {
         //todo check orderCount 写页面里
         var data ={
             "goodId" :id,
             "orderCount": orderCount
         };
-        $.post(urls.tocar,data,function (r) {
-            //todo 弹框 r.info 是返回的信息，r.status == 1 是成功 0 是失败
-        },"json");
+            $.ajax({
+                type: "POST",
+                url: urls.tocar,
+                data: data,
+                dataType:"json",
+                success: function(r){
+                    alert( "Data Saved: " + r.info );
+                },
+                error: function(r){
+                    alert( "Error: " + r.info);
+                }
+            });
+
+        }
     }
 </script>
 </body>

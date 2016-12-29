@@ -43,7 +43,7 @@
             </ul>
         </div>
         <div class="carbdprice"><fmt:formatNumber type="currency">${item.getDouble("good_price")}</fmt:formatNumber> </div>
-        <div class="carbdnum">1</div>
+        <div class="carbdnum">${item.getInt("orderCount")}</div>
     </div>
     </c:forEach>
     <div class="carfooter">

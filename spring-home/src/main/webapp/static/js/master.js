@@ -62,11 +62,10 @@ $(function(){
                         url : urls.login,
                         data: data,
                         success: function (r) {
-                            alert("func");
                             if(r.status== 1 ){
+                                alert("登录成功");
                             $("#logbody").load("/static/html/info.html",
                                 function () {
-                                    alert("ok");
                                     $("#content").val(r.info);
 
                                     $("#okbtn").click(function () {
@@ -76,6 +75,9 @@ $(function(){
                             else {
                                 alert("no");
                             }
+                        },
+                        error:function (r) {
+                            alert("???");
                         },
                         type: "POST",
                         dataType: "json"
@@ -121,13 +123,12 @@ $(function(){
                                     })
                                 }
                             )}
-                            else {
+                            else if(r.status==0){
                                 alert("用户名已存在")
                             }
-
-                        },
-                        error: function (r) {
-                            alert("?????");
+                            else {
+                                alert("sltm");
+                            }
                         },
                         type: "POST",
                         dataType: "json"

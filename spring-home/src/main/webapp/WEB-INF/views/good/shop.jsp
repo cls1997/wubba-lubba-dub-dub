@@ -52,7 +52,28 @@
 </div>
 <script>
     function submit() {
-        urls.carCheckout
+        var data={
+            "goodId":${item.get("goodId")},
+            "orderCount":   ${item.getInt("orderCount")},
+            "saddress":${user.address}
+        };
+        $.ajax({
+            type:"POST",
+            url:urls.carCheckout,
+            data:data,
+            dataType:"json",
+            success:function (r) {
+                if(r.status==1){
+                    alert("购买成功，共"+r.info+"件商品")
+                }
+                else{
+                    alert("???");
+                }
+            },
+            error:function (r) {
+                alert("fail"+r.info);
+            }
+        });
         /*
          * TODO 自己写 info是成功的数量
          * Time: 16/12/29 7:20
