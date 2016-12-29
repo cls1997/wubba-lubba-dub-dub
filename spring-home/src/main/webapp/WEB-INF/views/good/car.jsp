@@ -42,7 +42,7 @@
                 <li class="carbddelete"><a href="javascript:deleteCar(${item.getInt("id")});"> 删除</a></li>
             </ul>
         </div>
-        <div class="carbdprice"><fmt:formatNumber type="currency">${item.getDouble("good_price")}</fmt:formatNumber> </div>
+        <div class="carbdprice"><fmt:formatNumber type="currency">${item.getDouble("orderPrice")}</fmt:formatNumber> </div>
         <div class="carbdnum">${item.getInt("orderCount")}</div>
     </div>
     </c:forEach>

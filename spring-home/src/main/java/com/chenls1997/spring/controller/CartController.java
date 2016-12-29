@@ -77,7 +77,7 @@ public class CartController extends BaseController {
         }
 
         model.addAttribute("count", result.size());
-        model.addAttribute("price", price.doubleValue());
+        model.addAttribute("price", price);
         model.addAttribute("cart", result);
         return "good/car";
     }
@@ -137,8 +137,12 @@ public class CartController extends BaseController {
         List<Row> checkouts = cartService.findByUserid(this.getCurrentUserId());
         Double price = 0d;
 
-        for (Row r:checkouts)
+        for (Row r : checkouts){
             price+= r.getDouble("orderPrice") * r.getInt("orderCount");
+            r.put("goodName",goodService.findByID(r.getInt("goodId")).getGoodName());
+            r.put("typeName",typeService.findByID(goodService.findByID(r.getInt("goodId")).getGoodTypeId()).getName());
+            r.put("goodPic",UploadUtils.parseFileUrl(goodService.findByID(r.getInt("goodId")).getGoodImage()));
+        }
 
         model.addAttribute("checkouts",checkouts);
         model.addAttribute("user",this.getCurrentUser());
