@@ -17,37 +17,7 @@
 <body>
 
 <%@include file="../include/header.jsp"%>
-<script>
-    function submit() {
-        var data={
-            "goodId":${item.get("goodId")},
-            "orderCount":   ${item.getInt("orderCount")},
-            "saddress":${user.address}
-        };
-        $.ajax({
-            type:"POST",
-            url:urls.carCheckout,
-            data:data,
-            dataType:"json",
-            success:function (r) {
-                if(r.status==1){
-                    alert("购买成功，共"+r.info+"件商品")
-                }
-                else{
-                    alert("???");
-                }
-            },
-            error:function (r) {
-                alert("fail"+r.info);
-            }
-        });
-        /*
-         * TODO 自己写 info是成功的数量
-         * Time: 16/12/29 7:20
-         * Creator: Chenls
-         */
-    }
-</script>
+
 <div class="shopbody">
     <div class="shopleft">
         <div class="sgtitle">商品信息</div>
@@ -74,12 +44,32 @@
         <div class="sainput"><input type="text" value="${user.address}" id="sads"></div>
         <div class="saphone">联系电话：<input type="text" value="${user.phone}" id="sphone"></div>
         <div class="satotalprice">合计：<span><fmt:formatNumber type="currency">${price}</fmt:formatNumber> </span></div>
-        <div class="sashopbtn" onclick="submit()">购买</div>
+        <div class="sashopbtn"><span onclick="submit();">购买</span></div>
     </div>
 </div>
 
 <div class="login" id="logbody">
 </div>
-
+<script>
+    function submit() {
+        var data={
+            "saddress": $("#sads").val(),
+        };
+        $.post(urls.carCheckout,data,function (r) {
+                if(r.status==1){
+                    alert("购买成功，共"+r.info+"件商品")
+                }
+                else{
+                    alert("???");
+                }
+            }
+        );
+        /*
+         * TODO 自己写 info是成功的数量
+         * Time: 16/12/29 7:20
+         * Creator: Chenls
+         */
+    }
+</script>
 </body>
 </html>

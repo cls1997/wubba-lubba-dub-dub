@@ -92,8 +92,6 @@ public class SubController extends BaseController {
     @Login
     @RequestMapping(value = "checkout")
     public String checkoutHandler(Model model,HttpServletRequest request,HttpServletResponse response,
-                                @RequestParam Integer goodId,
-                                @RequestParam Integer orderCount,
                                 @RequestParam String saddress){
         List<Row> cart = cartService.findByUserid(this.getCurrentUserId());
         Sub s = null;
@@ -107,6 +105,7 @@ public class SubController extends BaseController {
             s.setPrice(r.getDouble("orderPrice")*r.getInt("orderCount"));
             s.setState(1);
             ret+= subService.save(s);
+            cartService.delete(r.getInt("id"));
         }
         return ajaxReturn(response,null,ret.toString(),ret>=1?1:0);
     }
