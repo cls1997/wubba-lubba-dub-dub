@@ -72,6 +72,11 @@
             </div></form>
     </div>
 <script>
+    $(function(){
+        $("#confirmsub").click(function(){
+            $(".commentbody").toggle(600);
+        });
+    })
     function confirm(id) {
         alert(id);
         var data ={
@@ -82,8 +87,9 @@
             url: urls.confirmGet,
             data: data,
             dataType:"json",
+            async:false,
             success: function(r){
-                if(r.state()==1)
+                if(r.status==1)
                 alert( "Data Saved: " + r.info );
                 else alert("fail"+r.info);
             },
