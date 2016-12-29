@@ -42,6 +42,9 @@ public class CommentController extends BaseController {
         Comment c = new Comment();
         c.setGoodId(goodId);
         c.setContent(content);
+        System.out.println("aaa");
+        System.out.println(goodId);
+        System.out.println(content);
         c.setDate(new Timestamp(new Date().getTime()));
         c.setUserId(this.getCurrentUserId());
         return ajaxReturn(response, null);

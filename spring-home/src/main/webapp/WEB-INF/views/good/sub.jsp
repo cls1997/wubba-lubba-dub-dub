@@ -65,20 +65,14 @@
     <div class="cm_head">评&nbsp;论</div>
     <div class="cm_body">
         <div class="cm_msg">确认收货成功！写点评论吧</div>
-        <form action="/comment/do" method="POST">
+        <form>
             <div class="login-mb"><textarea id="commenttext" wrap="physical" name="content"></textarea>
                 <div class="login-mb"><input type="submit" id="commentbtn"></div>
 
             </div></form>
     </div>
 <script>
-    $(function(){
-        $("#confirmsub").click(function(){
-            $(".commentbody").toggle(600);
-        });
-    })
     function confirm(id) {
-        alert(id);
         var data ={
             "id" :id,
         };
@@ -89,8 +83,32 @@
             dataType:"json",
             async:false,
             success: function(r){
-                if(r.status==1)
-                alert( "Data Saved: " + r.info );
+                if(r.status==1) {
+                    alert("Data Saved: " + id);
+                    $(".commentbody").show(600);
+                    $("#commentbtn").click(function () {
+                        alert("?????");
+                        var cdata={
+                            "content":$("#content").val(),
+                            "goodId":id
+                        }
+                        $.ajax({
+                            type:"POST",
+                            url:"/comment/do",
+                            data:cdata,
+                            dataType:"json",
+                            async:false,
+                            success:function (r) {
+                                alert("评价成功"+r.status);
+                            },
+                            error: function(XMLHttpRequest,textStatus, errorThrown) {
+                                alert(XMLHttpRequest.status);
+                                alert(XMLHttpRequest.readyState);
+                                alert(textStatus);
+                            },
+                        });
+                    });
+                }
                 else alert("fail"+r.info);
             },
             error: function(r){
