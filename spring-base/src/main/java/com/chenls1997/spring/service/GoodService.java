@@ -6,10 +6,13 @@ import com.chenls1997.spring.util.UIUtils;
 import com.zlzkj.core.mybatis.SqlRunner;
 import com.zlzkj.core.sql.Row;
 import com.zlzkj.core.sql.SQLBuilder;
+import org.apache.ibatis.jdbc.SQL;
+import org.apache.ibatis.ognl.IntHashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -65,5 +68,25 @@ public class GoodService {
         }
         Integer count = sqlRunner.count(countSql);
         return UIUtils.getGridData(count, list);
+    }
+
+    public List<Row> searchServiceHandler(String name,Integer typeId, Integer providerId){
+        SQLBuilder sqlBuilder = SQLBuilder.getSQLBuilder(Good.class);
+        Map<String, Object> where = new HashMap<>();
+
+        if (name!=null)
+            where.put("good_name",name);
+        if (typeId!=null)
+            where.put("good_type_id",typeId);
+        if (providerId!=null)
+            where.put("provider_id",providerId);
+
+        String sql = sqlBuilder
+                .fields("*")
+                .where(where)
+                .order("id","asc")
+                .selectSql();
+
+        return sqlRunner.select(sql);
     }
 }

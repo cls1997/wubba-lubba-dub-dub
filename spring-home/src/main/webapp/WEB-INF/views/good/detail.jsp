@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: touka
@@ -19,7 +20,9 @@
 <div class="details">
     <div class="gsell">
         <div class="dgimg"><img src="${pic_url}"></div>
-        <div class="detitle">${good.goodName}</div>
+        <div class="detitle">
+            ${providerName}&nbsp;${good.goodName}&nbsp;${good.goodIntro}
+        </div>
         <div class="goodspan">
             <div class="goodtype">标签：<div>${goodTypeName}</div></div>
             <div class="deprice">价格：<span class="pricenum">${good.goodPrice}</span></div>

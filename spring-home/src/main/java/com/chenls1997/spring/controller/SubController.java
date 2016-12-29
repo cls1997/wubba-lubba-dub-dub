@@ -86,7 +86,6 @@ public class SubController extends BaseController {
         s.setState(1);
 
         return ajaxReturn(response,null,"",subService.save(s));
-
     }
 
     @Login
@@ -119,5 +118,4 @@ public class SubController extends BaseController {
         Integer ret = subService.update(s);
         return ajaxReturn(response,null,ret.toString(),ret);
     }
-
 }

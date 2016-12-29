@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -30,14 +31,17 @@ import java.util.Map;
 public class GoodController extends BaseController {
     private final GoodService goodService;
     private final TypeService typeService;
+    private final UserService userService;
     private final CommentService commentService;
 
     @Autowired
-    public GoodController(HttpSession httpSession, CommentService commentService, GoodService goodService, TypeService typeService) {
+    public GoodController(HttpSession httpSession, CommentService commentService, GoodService goodService,
+                          TypeService typeService, UserService userService) {
         super(httpSession);
         this.commentService = commentService;
         this.goodService = goodService;
         this.typeService = typeService;
+        this.userService = userService;
     }
 
     @RequestMapping(value = "{goodid}")
@@ -46,12 +50,17 @@ public class GoodController extends BaseController {
         Good ret = goodService.findByID(id);
         Integer commentCount = commentService.getCommentCountByGoodId(id);
         String goodTypeName = typeService.findByID(ret.getGoodTypeId()).getName();
+        List<Row> commentList = commentService.getCommentListByGoodId(id);
+
+        for (Row r:commentList)
+            r.put("author",userService.findByID(r.getInt("userId")).getUsername());
 
         attrs.put("good", ret);
         attrs.put("pic_url", UploadUtils.parseFileUrl(ret.getGoodImage()));
         attrs.put("commentCount", commentCount);
-        attrs.put("commentList", commentService.getCommentListByGoodId(id));
+        attrs.put("commentList", commentList);
         attrs.put("goodTypeName", goodTypeName);
+        attrs.put("providerName", userService.findByID(ret.getProviderId()).getUsername());
 
         model.addAllAttributes(attrs);
 
@@ -110,7 +119,27 @@ public class GoodController extends BaseController {
         } else {
             return ajaxReturn(response, null, "添加失败", 0);
         }
+    }
 
+    /**
+     * 商品搜索
+     * @param name
+     * @param typeName
+     * @param providerName
+     * @return
+     */
+    @RequestMapping(value = "search")
+    public String searchHandler(Model model,HttpServletRequest request,HttpServletResponse response,
+                                @RequestParam(required = false) String name,
+                                @RequestParam(required = false) String typeName,
+                                @RequestParam(required = false) String providerName
+                                ){
+        Integer typeId = typeService.getIdByName(typeName);
+        Integer providerId = userService.getIdByUsername(providerName);
+        List<Row> result = goodService.searchServiceHandler(name,typeId,providerId);
 
+        model.addAttribute("result",result);
+
+        return "good/search";
     }
 }

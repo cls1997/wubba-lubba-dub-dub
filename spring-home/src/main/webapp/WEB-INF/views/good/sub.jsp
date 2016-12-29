@@ -65,8 +65,8 @@
     <div class="cm_head">评&nbsp;论</div>
     <div class="cm_body">
         <div class="cm_msg">确认收货成功！写点评论吧</div>
-        <form>
-            <div class="login-mb"><textarea id="commenttext" wrap="physical" name="content"></textarea>
+        <form method="post">
+            <div class="login-mb"><textarea id="commenttext" wrap="physical"></textarea>
                 <div class="login-mb"><input type="submit" id="commentbtn"></div>
 
             </div></form>
@@ -89,8 +89,8 @@
                     $("#commentbtn").click(function () {
                         alert("?????");
                         var cdata={
-                            "content":$("#content").val(),
-                            "goodId":id
+                            "content":$("#commenttext").val(),
+                            "subId":id
                         }
                         $.ajax({
                             type:"POST",
