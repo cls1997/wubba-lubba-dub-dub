@@ -44,13 +44,16 @@
         <div class="sainput"><input type="text" value="${user.address}" id="sads"></div>
         <div class="saphone">联系电话：<input type="text" value="${user.phone}" id="sphone"></div>
         <div class="satotalprice">合计：<span><fmt:formatNumber type="currency">${price}</fmt:formatNumber> </span></div>
-        <div class="sashopbtn"><span onclick="submit();">购买</span></div>
+        <div class="sashopbtn" id="sasubmit">购买</div>
     </div>
 </div>
 
 <div class="login" id="logbody">
 </div>
 <script>
+    $(function () {
+        $("#sasubmit").click(submit());
+    })
     function submit() {
         var data={
             "saddress": $("#sads").val(),

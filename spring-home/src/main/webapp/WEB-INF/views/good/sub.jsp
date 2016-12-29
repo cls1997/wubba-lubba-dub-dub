@@ -65,7 +65,23 @@
 <script>
     function confirm(id) {
         alert(id);
-        urls.confirmGet
+        var data ={
+            "id" :id,
+        };
+        $.ajax({
+            type: "POST",
+            url: urls.confirmGet,
+            data: data,
+            dataType:"json",
+            success: function(r){
+                if(r.state()==1)
+                alert( "Data Saved: " + r.info );
+                else alert("fail"+r.info);
+            },
+            error: function(r){
+                alert( "Error");
+            }
+        });
         /*
          * TODO info/status 1成功 0失败
          * Time: 16/12/29 7:16
@@ -76,6 +92,7 @@
     function onemore(id) {
         alert(id)
         url.oneMore
+
     }
 </script>
 </body>
