@@ -49,23 +49,13 @@
     <div class="deseller">
         <div>本店商品</div>
         <ul>
+            <c:forEach items="${bendianshangpin}" var="item">
             <li>
-                <img src="${__static__}/images/goodtest.png">
+                <a href="${z:u('good')}/${item.get("id")}" ><img src="${item.get('goodPic')}"></a>
             </li>
-            <li>
-                <img src="${__static__}/images/goodtest.png">
-            </li>
-            <li>
-                <img src="${__static__}/images/goodtest.png">
-            </li>
-            <li>
-                <img src="${__static__}/images/goodtest.png">
-            </li>
-            <li>
-                <img src="${__static__}/images/goodtest.png">
-            </li>
+            </c:forEach>
         </ul>
-        <span>更多>>></span>
+        <span href="${z:u('good/search')}+?providerName=${providerName}">更多>>></span>
     </div>
     <div class="comment">
         <h1>商品评价</h1>
