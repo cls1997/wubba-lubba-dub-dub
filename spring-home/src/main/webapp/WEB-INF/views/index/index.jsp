@@ -119,7 +119,7 @@
             <div class="goodstab">
                 <a href="detail.html" target="_blank">
                     <img src="${__static__}/images/goodhover.png" class="goodhov" title="去看详情">
-                    <img src="${__static__}/images/g2.png">
+                    <div class="imgctn"><img src="${__static__}/images/g2.png"></div>
                 </a>
                 <div class="price">$120.00</div>
                 <h3>大吉岭红茶</h3>
@@ -137,7 +137,7 @@
             <div class="goodstab">
                 <a href="detail.html" target="_blank">
                     <img src="${__static__}/images/goodhover.png" class="goodhov" title="去看详情">
-                    <img src="${__static__}/images/g3.png">
+                    <div class="imgctn"><img src="${__static__}/images/g3.png"></div>
                 </a>
                 <div class="price">$120.00</div>
                 <h3>大吉岭红茶</h3>
@@ -155,7 +155,7 @@
             <div class="goodstab">
                 <a href="detail.html" target="_blank">
                     <img src="${__static__}/images/goodhover.png" class="goodhov" title="去看详情">
-                    <img src="${__static__}/images/g4.png">
+                    <div class="imgctn"><img src="${__static__}/images/g4.png"></div>
                 </a>
                 <div class="price">$120.00</div>
                 <h3>大吉岭红茶</h3>
@@ -173,7 +173,7 @@
             <div class="goodstab">
                 <a href="detail.html" target="_blank">
                     <img src="${__static__}/images/goodhover.png" class="goodhov" title="去看详情">
-                    <img src="${__static__}/images/g5.png">
+                    <div class="imgctn"><img src="${__static__}/images/g5.png"></div>
                 </a>
                 <div class="price">$120.00</div>
                 <h3>大吉岭红茶</h3>
@@ -191,7 +191,7 @@
             <div class="goodstab">
                 <a href="detail.html" target="_blank">
                     <img src="${__static__}/images/goodhover.png" class="goodhov" title="去看详情">
-                    <img src="${__static__}/images/g6.png">
+                    <div class="imgctn"><img src="${__static__}/images/g6.png"></div>
                 </a>
                 <div class="price">$120.00</div>
                 <h3>大吉岭红茶</h3>
@@ -209,7 +209,7 @@
             <div class="goodstab">
                 <a href="detail.html" target="_blank">
                     <img src="${__static__}/images/goodhover.png" class="goodhov" title="去看详情">
-                    <img src="${__static__}/images/g7.jpg">
+                    <div class="imgctn"><img src="${__static__}/images/g7.jpg"></div>
                 </a>
                 <div class="price">$120.00</div>
                 <h3>大吉岭红茶</h3>
@@ -227,7 +227,7 @@
             <div class="goodstab">
                 <a href="detail.html" target="_blank">
                     <img src="${__static__}/images/goodhover.png" class="goodhov" title="去看详情">
-                    <img src="${__static__}/images/g8.jpg">
+                    <div class="imgctn"><img src="${__static__}/images/g8.jpg"></div>
                 </a>
                 <div class="price">$120.00</div>
                 <h3>大吉岭红茶</h3>
