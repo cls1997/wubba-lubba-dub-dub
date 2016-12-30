@@ -137,6 +137,11 @@ public class GoodController extends BaseController {
         Integer typeId = typeService.getIdByName(typeName);
         Integer providerId = userService.getIdByUsername(providerName);
         List<Row> result = goodService.searchServiceHandler(name,typeId,providerId);
+
+        for (Row r:result){
+            r.put("goodTypeName",typeService.findByID(r.getInt("goodTypeId")).getName());
+            r.put("goodPic",UploadUtils.parseFileUrl(r.getString("goodImage")));
+        }
         model.addAttribute("result",result);
         return "good/search";
     }
