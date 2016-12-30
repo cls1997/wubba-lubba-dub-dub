@@ -25,7 +25,7 @@
         </div>
         <div class="goodspan">
             <div class="goodtype">标签：<div>${goodTypeName}</div></div>
-            <div class="deprice">价格：<span class="pricenum">${good.goodPrice}</span></div>
+            <div class="deprice">价格：<span class="pricenum">￥${good.goodPrice}</span></div>
             <div class="city">物流：<span>上海市</span> 运至 <span>浙江 杭州</span></div>
             <div class="commennum">
                 <ul>
@@ -42,7 +42,7 @@
             <div class="destork">库存：${good.goodStock} &nbsp;件</div>
         </div>
         <div class="deshop">
-            <div class="toshopbtn" id="tobuy" onclick="buynow(${good.id})">立即购买</div>
+            <div class="toshopbtn" id="tobuy" onclick="buy(${good.id})">立即购买</div>
             <div class="toshopbtn" id="tocar" onclick="tocar(${good.id})">加入购物车</div>
         </div>
     </div>
@@ -118,6 +118,14 @@
 </div>
 <%@include file="../include/footer.jsp"%>
 <script>
+    function buy(id){
+        var c = confirm("共"+$("#he").val()+"件商品，合计￥"+($("#he").val()*${good.goodPrice})+"，是否购买？")
+        if(c==true)
+            buynow(id);
+        else {
+            window.location.reload();
+        }
+    }
     function buynow(id) {
 
         var data={
@@ -130,8 +138,14 @@
             data: data,
             dataType:"json",
             success: function(r){
-                if(r.state()==1)
-                alert( "ok" + r.info );
+                if(r.status==1){
+                    var c = confirm("购买成功，是否去订单页查看？")
+                    if(c==true)
+                        $(location).attr('href',"/sub/list");
+                    else {
+                        window.location.reload();
+                    }
+                }
                 else alert("no"+r.info)
             },
             error: function(r){

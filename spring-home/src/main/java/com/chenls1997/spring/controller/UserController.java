@@ -134,6 +134,8 @@ public class UserController extends BaseController {
                                  @RequestParam String question,
                                  @RequestParam String result,
                                  @RequestParam String newpass) {
+        System.out.println("aaaaa");
+        System.out.println(newpass);
         if (userService.forgetPassword(username,question,result)){
             User u = userService.findByID(userService.getIdByUsername(username));
             u.setPassword(newpass);

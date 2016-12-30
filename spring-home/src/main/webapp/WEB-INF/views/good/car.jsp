@@ -33,7 +33,7 @@
     </c:if>
     <c:forEach items="${cart}" var="item">
     <div class="carbody">
-        <div class="carbdimg"><img src="${__static__}/images/goodtest.png"></div>
+        <div class="carbdimg"><img src=${item.getString("good_img")}></div>
         <div class="carbdmsg">
             <ul>
                 <li class="carbdtitle">${item.getString("good_name")}</li>

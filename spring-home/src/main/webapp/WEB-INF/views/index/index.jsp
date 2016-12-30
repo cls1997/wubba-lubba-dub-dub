@@ -20,7 +20,27 @@
 <body>
 
 <%@include file="../include/header.jsp"%>
-
+<script>
+    $(function () {
+        $("#scsubmit").click(function () {
+            alert("func");
+            var name = $("#scname").val();
+            alert(name);
+            $.ajax({
+                type:"POST",
+                url:"/good/search",
+                data:{"name":name},
+                dataType:"json",
+                success:function (r) {
+                    alert("ok");
+                },
+                error: function(r) {
+                    alert(r);
+                },
+            });
+        });
+    })
+</script>
 <div class="banner">
     <div class="bntitle" id="bntitle"></div>
     <ul class="slider">
@@ -61,6 +81,21 @@
             <li>肉食</li>
         </ul>
     </div >
+<%--<script>--%>
+        <%--$(function () {--%>
+            <%--alert("1");--%>
+            <%--$.post("/good/search",{typeName:"坚果"},function(data){--%>
+                <%--alert("2");--%>
+                <%--alert(data);--%>
+                <%--var list = eval("("+data+")");--%>
+                <%--for(var i=0;i<list.length;i++){--%>
+                    <%--alert(list[i].id);--%>
+                <%--}--%>
+            <%--});--%>
+        <%--})--%>
+
+        <%--</script>--%>
+
     <div class="tab_box">
         <div>
             <div class="goodstab">

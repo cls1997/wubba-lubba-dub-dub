@@ -22,18 +22,20 @@
     <div class="carheader">
         <div class="carhdtitle">搜索结果</div>
     </div>
+    <c:forEach items="${result}" var="res">
     <div class="carbody">
-        <div class="carbdimg"><img src="images/goodtest.png"></div>
+        <div class="carbdimg"><img src="${result.get("goodImage")}"></div>
         <div class="carbdmsg">
             <ul>
-                <li class="carbdtitle">三只松鼠 夏威夷果200g</li>
-                <li class="carbdtype">标签：<div>坚果</div></li>
-                <li class="carbdstork">库存：200件</li>
+                <li class="carbdtitle">${result.get("goodName")} ${result.get("goodIntro")}</li>
+                <li class="carbdtype">标签：<div>${result.get("goodTypeId")}</div></li>
+                <li class="carbdstork">库存：${result.get("goodStock")}件</li>
             </ul>
         </div>
-        <div class="carbdprice">￥120.00</div>
-        <div class="carbdnum">前去查看</div>
+        <div class="carbdprice">￥${result.get("goodPrice")}</div>
+        <div class="carbdnum" id="scgo">前去查看</div>
     </div>
+    </c:forEach>
 
 </div>
 </body>

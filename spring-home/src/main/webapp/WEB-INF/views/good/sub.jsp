@@ -35,9 +35,13 @@
             </ul>
         </div>
         </c:forEach>
-        <div class="subnowbody">
+
+        <c:if test="${subs.size()==0}">
+            <div class="subnowbody">
                 <li><div class="subtitle">没有订单</div></li>
-        </div>
+            </div>
+        </c:if>
+
 
     </div>
     <div class="subhis">
@@ -53,9 +57,11 @@
                 </ul>
             </div>
         </c:forEach>
-        <div class="subnowbody">
-            <li><div class="subtitle">没有订单</div></li>
-        </div>
+        <c:if test="${outdatedSubs.size()==0}">
+            <div class="subnowbody">
+                <li><div class="subtitle">没有订单</div></li>
+            </div>
+        </c:if>
     </div>
 </div>
 
@@ -65,8 +71,8 @@
     <div class="cm_head">评&nbsp;论</div>
     <div class="cm_body">
         <div class="cm_msg">确认收货成功！写点评论吧</div>
-        <form method="post">
-            <div class="login-mb"><textarea id="commenttext" wrap="physical"></textarea>
+        <form>
+            <div class="login-mb"><textarea id="commenttext" wrap="physical" name="content"></textarea>
                 <div class="login-mb"><input type="submit" id="commentbtn"></div>
 
             </div></form>
@@ -87,7 +93,6 @@
                     alert("Data Saved: " + id);
                     $(".commentbody").show(600);
                     $("#commentbtn").click(function () {
-                        alert("?????");
                         var cdata={
                             "content":$("#commenttext").val(),
                             "subId":id

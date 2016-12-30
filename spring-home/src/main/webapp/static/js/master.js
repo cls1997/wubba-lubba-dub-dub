@@ -40,14 +40,22 @@ $(function () {
         window.location.reload();
     })
 })
+$(function () {
+
+})
 
  //点击登录弹窗
 $(function(){
     $("#loginbtn").click(function(){
         $("#logbody").toggle(600);
         $("#logbody").load("/static/html/login.html",function () {
+
             uload();
             pload();
+            if ($.cookie("rmbUser") == "true") {
+                $("#rem").prop({"checked":true});
+                $("#input_username").val($.cookie("nickName"));
+            }
             $("#loginsubmit").click(function(){
 
                 var username = $("#input_username").val();
@@ -74,7 +82,7 @@ $(function(){
                                 }
                             )}
                             else {
-                                alert(r.status);
+                                alert("用户名或密码错误");
                             }
                         },
                         error: function(XMLHttpRequest,textStatus, errorThrown) {
@@ -85,6 +93,17 @@ $(function(){
 
                     }
 
+                    function vailRememberNickName(){
+                        if($("#rem").is(':checked')){
+                            var nickName = $("#input_username").val();
+                            $.cookie("rmbUser", "true", { expires: 7 });
+                            $.cookie("nickName", nickName, { expires: 7 });
+                        }else {
+                            $.cookie("rmbUser", "false", { expires: -1 });
+                            $.cookie("nickName", '', { expires: -1 });
+                        }
+                    }
+                    vailRememberNickName();
                     $.ajax(settings);
                 }
             });
