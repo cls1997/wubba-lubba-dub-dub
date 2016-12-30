@@ -53,8 +53,8 @@
 
         <div class="searchtext">
             <span>搜本店</span>
-            <form method="get">
-                <input type="text" id="scname">
+            <form method="get" action="${z:u('good/search')}">
+                <input type="text" id="scname" name="name">
                 <input type="submit" value="" id="scsubmit">
             </form>
         </div>

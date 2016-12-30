@@ -9,7 +9,6 @@ import com.chenls1997.spring.service.SubService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -42,17 +41,16 @@ public class CommentController extends BaseController {
     @RequestMapping("do")
     public String doHandler(Model model, HttpServletRequest request, HttpServletResponse response,
                             @RequestParam("content") String content,
-                            @RequestParam Integer subId) {
+                            @RequestParam Integer subId,
+                            @RequestParam Integer star) {
         Sub s = subService.findByID(subId);
         Integer goodId = s.getGoodId();
         Comment c = new Comment();
         c.setGoodId(goodId);
         c.setContent(content);
-        System.out.println("aaa");
-        System.out.println(goodId);
-        System.out.println(content);
         c.setDate(new Timestamp(new Date().getTime()));
         c.setUserId(this.getCurrentUserId());
+        c.setStar(star);
 
         return ajaxReturn(response, null,"",commentService.save(c));
     }

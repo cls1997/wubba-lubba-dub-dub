@@ -13,6 +13,8 @@ public class Comment {
 
     private Date date;
 
+    private Integer star;
+
     public Integer getId() {
         return id;
     }
@@ -51,5 +53,13 @@ public class Comment {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Integer getStar() {
+        return star;
+    }
+
+    public void setStar(Integer star) {
+        this.star = star;
     }
 }

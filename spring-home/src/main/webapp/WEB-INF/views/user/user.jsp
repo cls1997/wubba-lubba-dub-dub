@@ -56,7 +56,7 @@
         }
         $.post(urls.usersave,data,function (r) {
             //todo 1成功 0失败。
-            alert(r.status);
+            alert("修改成功");
         });
     }
 </script>

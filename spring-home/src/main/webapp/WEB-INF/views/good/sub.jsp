@@ -69,6 +69,15 @@
 </div>
 <div class="commentbody">
     <div class="cm_head">评&nbsp;论</div>
+    <div class="star">
+        <ul>
+            <li onclick="star(1);"></li>
+            <li onclick="star(2);"></li>
+            <li onclick="star(3);"></li>
+            <li onclick="star(4);"></li>
+            <li onclick="star(5);"></li>
+        </ul>
+    </div>
     <div class="cm_body">
         <div class="cm_msg">确认收货成功！写点评论吧</div>
         <form>
@@ -78,6 +87,17 @@
             </div></form>
     </div>
 <script>
+    var stars=0;
+    function star(i) {
+        if ($(this).hasClass("off")){
+            stars = i;
+            $(this).siblings().attr("class","");
+        } else {
+            stars = i - 1;
+            $(this).siblings().attr("class","off");
+        }
+        alert(stars);
+    }
     function confirm(id) {
         var data ={
             "id" :id,
@@ -90,12 +110,12 @@
             async:false,
             success: function(r){
                 if(r.status==1) {
-                    alert("Data Saved: " + id);
                     $(".commentbody").show(600);
                     $("#commentbtn").click(function () {
                         var cdata={
                             "content":$("#commenttext").val(),
-                            "subId":id
+                            "subId":id,
+                            "star":stars
                         }
                         $.ajax({
                             type:"POST",
@@ -104,7 +124,7 @@
                             dataType:"json",
                             async:false,
                             success:function (r) {
-                                alert("评价成功"+r.status);
+                                alert("评价成功");
                             },
                             error: function(XMLHttpRequest,textStatus, errorThrown) {
                                 alert(XMLHttpRequest.status);

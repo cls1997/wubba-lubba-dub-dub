@@ -52,7 +52,8 @@
         }
         $.post(urls.forgot,data,
             function (r) {
-                alert(r);
+                alert("找回成功");
+
             }
         );
     }

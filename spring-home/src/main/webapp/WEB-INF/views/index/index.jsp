@@ -20,27 +20,6 @@
 <body>
 
 <%@include file="../include/header.jsp"%>
-<script>
-    $(function () {
-        $("#scsubmit").click(function () {
-            alert("func");
-            var name = $("#scname").val();
-            alert(name);
-            $.ajax({
-                type:"POST",
-                url:"/good/search",
-                data:{"name":name},
-                dataType:"json",
-                success:function (r) {
-                    alert("ok");
-                },
-                error: function(r) {
-                    alert(r);
-                },
-            });
-        });
-    })
-</script>
 <div class="banner">
     <div class="bntitle" id="bntitle"></div>
     <ul class="slider">
@@ -117,7 +96,7 @@
                 </div>
             </div>
             <div class="goodstab">
-                <a href="detail.html" target="_blank">
+                <a href="/good/6" target="_blank">
                     <img src="${__static__}/images/goodhover.png" class="goodhov" title="去看详情">
                     <div class="imgctn"><img src="${__static__}/images/g2.png"></div>
                 </a>
@@ -135,7 +114,7 @@
                 </div>
             </div>
             <div class="goodstab">
-                <a href="detail.html" target="_blank">
+                <a href="/good/7" target="_blank">
                     <img src="${__static__}/images/goodhover.png" class="goodhov" title="去看详情">
                     <div class="imgctn"><img src="${__static__}/images/g3.png"></div>
                 </a>
@@ -153,7 +132,7 @@
                 </div>
             </div>
             <div class="goodstab">
-                <a href="detail.html" target="_blank">
+                <a href="/good/8" target="_blank">
                     <img src="${__static__}/images/goodhover.png" class="goodhov" title="去看详情">
                     <div class="imgctn"><img src="${__static__}/images/g4.png"></div>
                 </a>
@@ -171,7 +150,7 @@
                 </div>
             </div>
             <div class="goodstab">
-                <a href="detail.html" target="_blank">
+                <a href="/good/9" target="_blank">
                     <img src="${__static__}/images/goodhover.png" class="goodhov" title="去看详情">
                     <div class="imgctn"><img src="${__static__}/images/g5.png"></div>
                 </a>
@@ -189,7 +168,7 @@
                 </div>
             </div>
             <div class="goodstab">
-                <a href="detail.html" target="_blank">
+                <a href="/good/10" target="_blank">
                     <img src="${__static__}/images/goodhover.png" class="goodhov" title="去看详情">
                     <div class="imgctn"><img src="${__static__}/images/g6.png"></div>
                 </a>
@@ -207,7 +186,7 @@
                 </div>
             </div>
             <div class="goodstab">
-                <a href="detail.html" target="_blank">
+                <a href="/good/3" target="_blank">
                     <img src="${__static__}/images/goodhover.png" class="goodhov" title="去看详情">
                     <div class="imgctn"><img src="${__static__}/images/g7.jpg"></div>
                 </a>
@@ -225,7 +204,7 @@
                 </div>
             </div>
             <div class="goodstab">
-                <a href="detail.html" target="_blank">
+                <a href="/good/4" target="_blank">
                     <img src="${__static__}/images/goodhover.png" class="goodhov" title="去看详情">
                     <div class="imgctn"><img src="${__static__}/images/g8.jpg"></div>
                 </a>

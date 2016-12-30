@@ -49,13 +49,12 @@
     <div class="deseller">
         <div>本店商品</div>
         <ul>
-            <c:forEach items="${bendianshangpin}" var="item">
+            <c:forEach items="${bendianshangpin}" var="item" begin="1" end="${5}">
             <li>
-                <a href="${z:u('good')}/${item.get("id")}" ><img src="${item.get('goodPic')}"></a>
+                <a href="${z:u('good')}/${item.get("id")}" ><div class="deimg"><img src="${item.get('goodPic')}"></div></a>
             </li>
             </c:forEach>
         </ul>
-        <span href="${z:u('good/search')}+?providerName=${providerName}">更多>>></span>
     </div>
     <div class="comment">
         <h1>商品评价</h1>
@@ -73,35 +72,6 @@
             </c:forEach>
         </ul>
     </div>
-</div>
-<div class="center"><img src="${__static__}/images/hr2.png"></div>
-<div class="dcookie">
-    <ul>
-        <li>
-            <div class="cookiectn">
-                <div class="cookieimg"><img src="${__static__}/images/goodtest.png"></div>
-                <div class="cookietext">夏威夷果200g</div>
-            </div>
-        </li>
-        <li>
-            <div class="cookiectn">
-                <div class="cookieimg"><img src="${__static__}/images/goodtest.png"></div>
-                <div class="cookietext">夏威夷果200g</div>
-            </div>
-        </li>
-        <li>
-            <div class="cookiectn">
-                <div class="cookieimg"><img src="${__static__}/images/goodtest.png"></div>
-                <div class="cookietext">夏威夷果200g</div>
-            </div>
-        </li>
-        <li>
-            <div class="cookiectn">
-                <div class="cookieimg"><img src="${__static__}/images/goodtest.png"></div>
-                <div class="cookietext">夏威夷果200g</div>
-            </div>
-        </li>
-    </ul>
 </div>
 
 <div class="login" id="logbody">
