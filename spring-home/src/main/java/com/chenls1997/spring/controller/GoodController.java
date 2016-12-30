@@ -51,6 +51,10 @@ public class GoodController extends BaseController {
         Integer commentCount = commentService.getCommentCountByGoodId(id);
         String goodTypeName = typeService.findByID(ret.getGoodTypeId()).getName();
         List<Row> commentList = commentService.getCommentListByGoodId(id);
+        List<Row> bdsp = goodService.searchServiceHandler(null,null,ret.getProviderId());
+
+        for (Row r:bdsp)
+            r.put("goodPic",UploadUtils.parseFileUrl(r.getString("goodImage")));
 
         for (Row r:commentList)
             r.put("author",userService.findByID(r.getInt("userId")).getUsername());
@@ -61,6 +65,7 @@ public class GoodController extends BaseController {
         attrs.put("commentList", commentList);
         attrs.put("goodTypeName", goodTypeName);
         attrs.put("providerName", userService.findByID(ret.getProviderId()).getUsername());
+        attrs.put("bendianshangpin", bdsp.subList(0,bdsp.size()<=5?bdsp.size():5));
 
         model.addAllAttributes(attrs);
 
