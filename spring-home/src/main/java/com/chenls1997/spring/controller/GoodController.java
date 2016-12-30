@@ -134,12 +134,10 @@ public class GoodController extends BaseController {
                                 @RequestParam(required = false) String typeName,
                                 @RequestParam(required = false) String providerName
                                 ){
-        System.out.println(name);
         Integer typeId = typeService.getIdByName(typeName);
         Integer providerId = userService.getIdByUsername(providerName);
         List<Row> result = goodService.searchServiceHandler(name,typeId,providerId);
         model.addAttribute("result",result);
-        System.out.println(result);
         return "good/search";
     }
 }

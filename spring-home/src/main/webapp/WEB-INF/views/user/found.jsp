@@ -19,7 +19,7 @@
 
 <div class="center"><img src="${__static__}/images/found.png"></div>
 <div class="foundform">
-    <form >
+
         <div class="found-mb">请输入您的用户名：</div>
         <div class="found-mb"><input type="text" id="username"></div>
         <div class="found-mb">请输入您的安全问题：</div>
@@ -30,8 +30,8 @@
         <div class="found-mb"><input type="password" id="pwd"></div>
         <div class="found-mb">请确认您的新密码：</div>
         <div class="found-mb"><input type="password" id="cfmpwd"></div>
-        <div class="found-mb"><input type="submit" value="找回密码" id="foundbtn"></div>
-    </form>
+        <div class="found-mb"><input type="submit" value="找回密码" id="foundbtn" onclick="submit();"></div>
+
 </div>
 
 <div class="login" id="logbody">
@@ -39,9 +39,6 @@
 
 <%@include file="../include/footer.jsp"%>
 <script>
-    $(function () {
-        $("#foundbtn").click(submit());
-    })
     function submit() {
         alert("a");
         var pwd = $("#pwd").val();
@@ -53,18 +50,11 @@
             result: $("#result").val(),
             newpass: pwd,
         }
-        $.ajax({
-            type:"POST",
-            url:urls.forgot,
-            data:data,
-            dataType:"json",
-            success:function (r) {
+        $.post(urls.forgot,data,
+            function (r) {
                 alert(r);
-            },
-            error:function (r) {
-                alert("?")
             }
-        });
+        );
     }
 </script>
 </body>
