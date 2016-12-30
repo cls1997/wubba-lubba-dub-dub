@@ -99,7 +99,7 @@
     <div class="tab_box">
         <div>
             <div class="goodstab">
-                <a href="detail.html" target="_blank">
+                <a href="/good/5" target="_blank">
                     <img src="${__static__}/images/goodhover.png" class="goodhov" title="去看详情">
                     <div class="imgctn"><img src="${__static__}/images/g1.png"></div>
                 </a>
